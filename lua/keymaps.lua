@@ -55,13 +55,15 @@ vim.keymap.set('n', '<leader>bd', ':bd<cr>', opts)
 vim.keymap.set('v', '<leader>bd', '<esc> :bd<cr>', opts)
 vim.keymap.set('i', '<leader>bd', '<esc> :bd<cr>', opts) -- }}}
 
+-- Move to Previous and Next Buffer {{{
 vim.keymap.set('n', '<C-h>', ':bprev<cr>', opts)
 vim.keymap.set('v', '<C-h>', '<esc> :bprev<cr>', opts)
-vim.keymap.set('i', '<C-h>', '<esc> :bprev<cr>', opts) -- }}}
+vim.keymap.set('i', '<C-h>', '<esc> :bprev<cr>', opts)
 
--- vim.keymap.set('n', '<C-l>', ':bnext<cr>', opts)
--- vim.keymap.set('v', '<C-l>', '<esc> :bnext<cr>', opts)
--- vim.keymap.set('i', '<C-l>', '<esc> :bnext<cr>', opts) -- }}}
+vim.keymap.set('n', '<C-l>', ':bnext<cr>', opts)
+vim.keymap.set('v', '<C-l>', '<esc> :bnext<cr>', opts)
+vim.keymap.set('i', '<C-l>', '<esc> :bnext<cr>', opts)
+-- }}}
 
 -- Run Eslint with Leader F {{{
 vim.keymap.set('n', '<leader>f', [[mF:%!eslint_d --stdin --fix-to-stdout --stdin-filename %<CR>`F]],
