@@ -17,13 +17,12 @@ return {
     })
     local ts_conds = require('nvim-autopairs.ts-conds')
 
-
     -- press % => %% only while inside a comment or string
     npairs.add_rules({
       Rule("%", "%", "lua")
         :with_pair(ts_conds.is_ts_node({'string','comment'})),
       Rule("$", "$", "lua")
-      :with_pair(ts_conds.is_not_ts_node({'function'}))
+        :with_pair(ts_conds.is_not_ts_node({'function'}))
     })
     -- skip it, if you use another global object
     _G.MUtils= {}
@@ -63,9 +62,9 @@ return {
           :with_move(cond.none())
           :with_cr(cond.none())
           :with_del(function(opts)
-            local col = vim.api.nvim_win_get_cursor(0)[2]
-            return a1..ins..ins..a2 == opts.line:sub(col - #a1 - #ins + 1, col + #ins + #a2) -- insert only works for #ins == 1 anyway
-          end)
+          local col = vim.api.nvim_win_get_cursor(0)[2]
+          return a1..ins..ins..a2 == opts.line:sub(col - #a1 - #ins + 1, col + #ins + #a2) -- insert only works for #ins == 1 anyway
+        end)
       )
     end
 
@@ -76,6 +75,6 @@ return {
     Rule2('{{',' ','}}','vue')
     Rule2('({',' ','})','vue')
     Rule2('{',' ','}')
---}}}
+    --}}}
   end
 }

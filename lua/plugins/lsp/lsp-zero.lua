@@ -1,8 +1,8 @@
 return {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v3.x',
-    lazy = true,
-    config = function ()
+  'VonHeikemen/lsp-zero.nvim',
+  branch = 'v3.x',
+  lazy = true,
+  config = function ()
     local lsp_zero = require('lsp-zero')
 
     lsp_zero.on_attach(function(client, bufnr)
@@ -19,6 +19,6 @@ return {
         lsp_zero.default_setup,
       },
     })
-      --   lua_ls,
+    --   lua_ls,
   end,
 }

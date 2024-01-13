@@ -120,8 +120,8 @@ return {
           },
           mappings = {
             ["<space>"] = {
-                "toggle_node",
-                nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use 
+              "toggle_node",
+              nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
             },
             ["<2-LeftMouse>"] = "open",
             ["<cr>"] = "open",
@@ -289,11 +289,11 @@ return {
         event_handlers = {
           {
             event = "file_opened",
-            handler = function(file_path)
-            -- auto close
-            -- vimc.cmd("Neotree close")
-            -- OR
-            require("neo-tree.command").execute({ action = "close" })
+            handler = function()
+              -- auto close
+              -- vimc.cmd("Neotree close")
+              -- OR
+              require("neo-tree.command").execute({ action = "close" })
             end
           },
         }
