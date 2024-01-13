@@ -19,6 +19,5 @@ return {
         lsp_zero.default_setup,
       },
     })
-    --   lua_ls,
   end,
 }
