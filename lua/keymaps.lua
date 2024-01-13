@@ -72,6 +72,6 @@ vim.keymap.set('n', '<leader>f', [[mF:%!eslint_d --stdin --fix-to-stdout --stdin
 
 -- Run Eslint Fix on Write {{{
 vim.api.nvim_exec([[
-  autocmd BufWritePost * if &filetype =~# 'typescript\|javascript\|jsx\|vue' | silent! execute "normal! mF:%!eslint_d --stdin --fix-to-stdout --stdin-filename %\<CR>\`F" | endif
+  autocmd BufWritePre * if &filetype =~# 'typescript\|javascript\|jsx\|vue' | silent! execute "normal! mF:%!eslint_d --stdin --fix-to-stdout --stdin-filename %\<CR>\`F" | endif
 ]], false)
 -- }}}
