@@ -11,7 +11,7 @@ return {
       ensure_installed = {
         -- Opt to list sources here, when available in mason.
         "prettier",
-        "eslint_d"
+        "eslint-lsp"
       },
       automatic_installation = false,
       handlers = {},

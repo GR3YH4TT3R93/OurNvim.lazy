@@ -1,6 +1,7 @@
 local opts = { noremap = true, silent = true }
 
 -- Move Commands{{{
+
 -- Normal-mode commands{{{
 vim.keymap.set('n', '<A-j>', ':MoveLine(1)<CR>', opts)
 vim.keymap.set('n', '<A-k>', ':MoveLine(-1)<CR>', opts)
@@ -15,7 +16,9 @@ vim.keymap.set('v', '<A-j>', ':MoveBlock(1)<CR>', opts)
 vim.keymap.set('v', '<A-k>', ':MoveBlock(-1)<CR>', opts)
 vim.keymap.set('v', '<A-h>', ':MoveHBlock(-1)<CR>', opts)
 vim.keymap.set('v', '<A-l>', ':MoveHBlock(1)<CR>', opts)
--- }}}}}}
+-- }}}
+
+--}}}
 
 -- Neo Tree Commands{{{
 vim.keymap.set('n', '<C-n>', ':Neotree toggle<cr>', opts) -- }}}
@@ -65,13 +68,18 @@ vim.keymap.set('v', '<C-l>', '<esc> :bnext<cr>', opts)
 vim.keymap.set('i', '<C-l>', '<esc> :bnext<cr>', opts)
 -- }}}
 
+-- Eslint{{{
+
 -- Run Eslint with Leader F {{{
-vim.keymap.set('n', '<leader>f', [[mF:%!eslint_d --stdin --fix-to-stdout --stdin-filename %<CR>`F]],
-  { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>f', 'EslintFixAll', opts)
 -- }}}
 
 -- Run Eslint Fix on Write {{{
-vim.api.nvim_exec([[
-  autocmd BufWritePre * if &filetype =~# 'typescript\|javascript\|jsx\|vue' | silent! execute "normal! mF:%!eslint_d --stdin --fix-to-stdout --stdin-filename %\<CR>\`F" | endif
-]], false)
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = { '*.tsx', '*.ts', '*.jsx', '*.js', '*.vue' },
+  command = 'silent! EslintFixAll',
+  group = vim.api.nvim_create_augroup('MyAutocmdsJavaScripFormatting', {}),
+})
 -- }}}
+
+--}}}
