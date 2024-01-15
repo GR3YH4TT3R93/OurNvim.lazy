@@ -4,7 +4,7 @@ return {
   config = function()
     require('neoclip').setup({
       history = 1000,
-      enable_persistent_history = false,
+      enable_persistent_history = true,
       length_limit = 1048576,
       continuous_sync = false,
       db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
