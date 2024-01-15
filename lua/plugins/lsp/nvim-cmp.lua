@@ -7,6 +7,7 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-nvim-lsp",
     "rafamadriz/friendly-snippets",
+    "honza/vim-snippets"
   },
   config = function()
     local cmp = require("cmp")
@@ -38,6 +39,7 @@ return {
       Operator = "",
       TypeParameter = "",
     }
+    require("luasnip.loaders.from_snipmate").lazy_load()
     require("luasnip.loaders.from_vscode").lazy_load()
     luasnip.config.setup({})
     -- local check_back_space = function()
