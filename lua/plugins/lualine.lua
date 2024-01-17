@@ -11,7 +11,7 @@ return {
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         disabled_filetypes = {
-          statusline = {},
+          statusline = { "zsh" },
           winbar = {},
         },
         ignore_focus = {},

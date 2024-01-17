@@ -71,9 +71,16 @@ return {
           return item
         end,
       },
+      preselect = cmp.PreselectMode.item,
       completion = {
         completeopt = 'menu,menuone,noinsert',
       },
+      -- sorting = {
+      --   comparators = {
+      --     cmp.config.compare.exact,
+      --     cmp.config.compare.locally,
+      --   },
+      -- },
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -118,32 +125,30 @@ return {
         end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
-        { name = 'nvim_lsp'},
-        { name = "luasnip" },
-        { name = "cmdline" },
-        { name = "fuzzy_buffer" },
-        { name = "fuzzy_path" },
-        { name = "emoji" },
+        { name = "nvim_lsp", group_index = 2 },
+        { name = "luasnip", group_index = 1 },
+        { name = "cmdline", group_index = 5 },
+        { name = "fuzzy_buffer", group_index = 3 },
+        { name = "fuzzy_path", group_index = 4 },
+        { name = "emoji", group_index = 6 },
       }),
-      -- -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-      -- cmp.setup.cmdline({ '/', '?' }, {
-      --   mapping = cmp.mapping.preset.cmdline(),
-      --   sources = {
-      --     { name = 'fuzzy_buffer' }
-      --   }
-      -- }),
-      --
-      -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-      -- cmp.setup.cmdline(':', {
-      --   mapping = cmp.mapping.preset.cmdline(),
-      --   sources = cmp.config.sources({
-      --     { name = 'fuzzy_path' }
-      --   }, {
-      --       { name = 'cmdline' }
-      --     })
-      -- }),
-      --
-      --
+      -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'fuzzy_buffer' }
+        }
+      }),
+
+      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'fuzzy_path' }
+        }, {
+            { name = 'cmdline' }
+          })
+      }),
     })
   end,
 }

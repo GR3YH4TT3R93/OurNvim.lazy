@@ -7,7 +7,7 @@ return {
     terminal_mappings = true,
     shade_terminals = false,
     winbar = {
-      enalbed = false
+      enabled = false
     }
   }
 }
