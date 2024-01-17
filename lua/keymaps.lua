@@ -42,7 +42,7 @@ vim.keymap.set('i', '<C-q>', '<esc> :q!<cr>', opts)
 vim.keymap.set('n', '<C-x>', ':x<cr>', opts)
 vim.keymap.set('v', '<C-x>', '<esc> :x<cr>', opts)
 vim.keymap.set('i', '<C-x>', '<esc> :x<cr>', opts)
---}]}
+--}}}
 
 -- ToggleTerm Commands{{{
 vim.keymap.set('n', '<leader>d', ':TermExec cmd="prd"<CR>')
@@ -111,7 +111,7 @@ vim.api.nvim_create_autocmd({'InsertLeave','TextChanged'}, {
 vim.api.nvim_create_autocmd("CursorHold", {
   buffer = bufnr,
   callback = function()
-    local opts = {
+    local opt = {
       focusable = false,
       close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
       border = 'rounded',
@@ -119,7 +119,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
       prefix = '',
       scope = 'cursor',
     }
-    vim.diagnostic.open_float(nil, opts)
+    vim.diagnostic.open_float(nil, opt)
   end
 })
 
