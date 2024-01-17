@@ -29,6 +29,19 @@ return {
       indent = {
         highlight = highlight,
         char = "│",
+        tab_char = "│",
+      },
+      scope = {
+        char = '┃',
+        highlight = {
+          'RainbowDelimiterRed',
+          'RainbowDelimiterYellow',
+          'RainbowDelimiterBlue',
+          'RainbowDelimiterOrange',
+          'RainbowDelimiterGreen',
+          'RainbowDelimiterViolet',
+          'RainbowDelimiterCyan',
+        },
       },
     }
   end,
