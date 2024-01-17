@@ -6,7 +6,6 @@ return {
     'windwp/nvim-ts-autotag',
     -- 'nvim-treesitter/nvim-treesitter-context',
     'JoosepAlviste/nvim-ts-context-commentstring',
-    -- 'tpope/vim-commentary',
     'numToStr/Comment.nvim',
     -- opts = {
     --     -- add any options here
