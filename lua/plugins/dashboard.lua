@@ -22,7 +22,7 @@ return {
           [[]],
         },
         packages = { enable = true },
-        project = { enable = true },
+        project = { enable = true, limit = 3 },
         week_header = {
           enable = false
         },
