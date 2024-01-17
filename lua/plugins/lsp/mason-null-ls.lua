@@ -6,7 +6,9 @@ return {
     "nvimtools/none-ls.nvim",
   },
   config = function()
-    require("mason").setup()
+    require("mason").setup({
+      automatic_installation = { excludes = "lua_ls" }
+    })
     require("mason-null-ls").setup({
       ensure_installed = {
         -- Opt to list sources here, when available in mason.

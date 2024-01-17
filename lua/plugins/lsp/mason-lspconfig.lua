@@ -15,6 +15,5 @@ return {
       --     require("rust-tools").setup {}
       -- end
     }
-    local automatic_installation = true
   end
 }

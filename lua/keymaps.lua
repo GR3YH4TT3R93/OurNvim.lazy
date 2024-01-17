@@ -108,6 +108,25 @@ vim.api.nvim_create_autocmd({'InsertLeave','TextChanged'}, {
 
 --}}}
 
+vim.api.nvim_create_autocmd("CursorHold", {
+  buffer = bufnr,
+  callback = function()
+    local opts = {
+      focusable = false,
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = 'rounded',
+      source = 'always',
+      prefix = '',
+      scope = 'cursor',
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end
+})
+
+-- Replace Current Word {{{
+vim.keymap.set('n', '<Leader>cw', '*Ncgn', opts)
+--}}}
+
 -- vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
 -- vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
 -- vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})

@@ -17,13 +17,13 @@ return{
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
     local lspconfig = require("lspconfig")
-    local function organize_imports()
-      local params = {
-        command = "_typescript.organizeImports",
-        arguments = { vim.api.nvim_buf_get_name(0) },
-      }
-      vim.lsp.buf.execute_command(params)
-    end
+    -- local function organize_imports()
+    --   local params = {
+    --     command = "_typescript.organizeImports",
+    --     arguments = { vim.api.nvim_buf_get_name(0) },
+    --   }
+    --   vim.lsp.buf.execute_command(params)
+    -- end
 
     -- local servers = { "tsserver", "tailwindcss", "pyright", "lua_ls" }
     --
@@ -68,18 +68,17 @@ return{
     --   on_attach = on_attach,
     --   capabilities = capabilities,
     -- })
-    lspconfig.stylelint_lsp.setup{
-      settings = {
-        stylelintplus = {
-          -- see available options in stylelint-lsp documentation
-        }
-      }
-    }
+    -- lspconfig.stylelint_lsp.setup{
+    --   settings = {
+    --     stylelintplus = {
+    --       -- see available options in stylelint-lsp documentation
+    --     }
+    --   }
+    -- }
     lspconfig.lua_ls.setup({
       on_attach = on_attach,
       capabilities = capabilities,
     })
-
 -- local lspconfig_configs = require'lspconfig.configs'
 -- local lspconfig_util = require 'lspconfig.util'
 --

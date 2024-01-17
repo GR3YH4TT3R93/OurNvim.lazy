@@ -6,6 +6,8 @@ return {
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-cmdline",
+    "hrsh7th/cmp-emoji",
     "rafamadriz/friendly-snippets",
     "honza/vim-snippets"
   },
@@ -39,22 +41,18 @@ return {
       Operator = "",
       TypeParameter = "",
     }
+
     require("luasnip.loaders.from_snipmate").lazy_load()
     require("luasnip.loaders.from_vscode").lazy_load()
+
     luasnip.config.setup({})
-    -- local check_back_space = function()
-    --   local col = vim.fn.col '.' - 1
-    --   return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s' ~= nil
-    -- end
+
     local has_words_before = function()
       unpack = unpack or table.unpack
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
-    -- local t = function(str)
 
-    --   return vim.api.nvim_replace_termcodes(str, true, true, true)
-    -- end
     cmp.setup({
       formatting = {
         fields = { "kind", "abbr", "menu" }, -- order of columns,
@@ -74,7 +72,7 @@ return {
         end,
       },
       completion = {
-        completeopt = 'menu,menuone,insert',
+        completeopt = 'menu,menuone,noinsert',
       },
       snippet = {
         expand = function(args)
@@ -91,10 +89,7 @@ return {
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping(cmp.mapping.confirm({
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
-        }), { "i", "c" }),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
 
         -- ['<Tab>'] = cmp.mapping(cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }), { 'i' }),
 
@@ -123,10 +118,32 @@ return {
         end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
-        { name = "nvim_lsp" },
+        { name = 'nvim_lsp'},
         { name = "luasnip" },
-        { name = "buffer" },
+        { name = "cmdline" },
+        { name = "fuzzy_buffer" },
+        { name = "fuzzy_path" },
+        { name = "emoji" },
       }),
+      -- -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+      -- cmp.setup.cmdline({ '/', '?' }, {
+      --   mapping = cmp.mapping.preset.cmdline(),
+      --   sources = {
+      --     { name = 'fuzzy_buffer' }
+      --   }
+      -- }),
+      --
+      -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      -- cmp.setup.cmdline(':', {
+      --   mapping = cmp.mapping.preset.cmdline(),
+      --   sources = cmp.config.sources({
+      --     { name = 'fuzzy_path' }
+      --   }, {
+      --       { name = 'cmdline' }
+      --     })
+      -- }),
+      --
+      --
     })
-  end
+  end,
 }
