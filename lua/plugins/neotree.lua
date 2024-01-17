@@ -79,11 +79,11 @@ return {
               deleted   = "✖",-- this can only be used in the git_status source
               renamed   = "󰁕",-- this can only be used in the git_status source
               -- Status type
-              untracked = "",
+              untracked = "󱪘",
               ignored   = "",
-              unstaged  = "󰄱",
-              staged    = "",
-              conflict  = "",
+              unstaged  = "󱪗",
+              staged    = "󱪝",
+              conflict  = "󱪟",
             }
           },
           -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
@@ -244,7 +244,7 @@ return {
         },
         buffers = {
           follow_current_file = {
-            enabled = false, -- This will find and focus the file in the active buffer every time
+            enabled = true, -- This will find and focus the file in the active buffer every time
             --              -- the current file is changed while the tree is open.
             leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
