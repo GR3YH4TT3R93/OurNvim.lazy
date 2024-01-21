@@ -26,3 +26,4 @@ vim.o.softtabstop=2
 vim.opt.clipboard:append { "unnamed", "unnamedplus" }
 vim.lsp.set_log_level("OFF")
 vim.notify = require("notify")
+vim.o.pumblend=1
