@@ -17,6 +17,10 @@ require("lazy").setup({
     { import = "plugins.lsp" },
     { import = "plugins.git" },
     { import = "plugins.telescope" },
+  },
+  change_detection = { notify = false },
+  install = {
+    colorscheme = { "onedark" }
   }
 })
 
