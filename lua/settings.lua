@@ -4,8 +4,8 @@ vim.o.t_Co=256
 vim.o.updatetime=100
 vim.o.nobackup=true
 vim.o.nowritebackup=true
-vim.o.spell=true
-vim.o.spelllang="en"
+-- vim.o.spell=true
+-- vim.o.spelllang="en"
 vim.o.ignorecase=true
 vim.o.smartcase=true
 vim.o.signcolumn="yes"
@@ -24,3 +24,5 @@ vim.o.tabstop=2
 vim.o.shiftwidth=2
 vim.o.softtabstop=2
 vim.opt.clipboard:append { "unnamed", "unnamedplus" }
+vim.lsp.set_log_level("OFF")
+vim.notify = require("notify")
