@@ -42,6 +42,7 @@ return {
       Event = "",
       Operator = "",
       TypeParameter = "",
+      Copilot = "",
     }
 
     luasnip.config.setup({})
@@ -60,17 +61,11 @@ return {
       formatting = {
         fields = { "kind", "abbr", "menu" }, -- order of columns,
         format = function(entry, item)
-          if item.kind == "Color" then
-            item = require("cmp-tailwind-colors").format(entry, item)
-
-            if item.kind ~= "Color" then
-              item.menu = "Color"
-              return item
-            end
-          end
-
           item.menu = item.kind
-          item.kind = kind_icons[item.kind] .. " "
+          item = require("cmp-tailwind-colors").format(entry, item)
+          if kind_icons[item.kind] then
+            item.kind = kind_icons[item.kind] .. " "
+          end
           return item
         end,
       },
@@ -130,6 +125,7 @@ return {
         end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
+        { name = "copilot", group_index = 1 },
         { name = "nvim_lsp", group_index = 2 },
         { name = "luasnip", group_index = 1 },
         { name = "cmdline", group_index = 4 },
