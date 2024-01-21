@@ -7,20 +7,20 @@ return {
     require("lualine").setup({
       options = {
         icons_enabled = true,
-        theme = "auto",
+        theme = "onedark",
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         disabled_filetypes = {
-          statusline = { "zsh" },
-          winbar = {},
+          statusline = { "neo-tree" },
+          winbar = { "neo-tree" },
         },
         ignore_focus = {},
         always_divide_middle = true,
         globalstatus = false,
         refresh = {
-          statusline = 1000,
-          tabline = 1000,
-          winbar = 1000,
+          statusline = 100,
+          tabline = 100,
+          winbar = 100,
         },
       },
       sections = {
@@ -40,12 +40,12 @@ return {
         lualine_z = {},
       },
       tabline = {
-        lualine_a = { { "buffers", show_filename_only = true } },
+        lualine_a = { { "buffers", mode = 2, } },
         lualine_x = {},
         lualine_y = {},
-        lualine_z = {},
+        lualine_z = { "tabs" },
       },
-      extensions = {},
+      extensions = { "lazy", "neo-tree", "toggleterm" },
     })
   end,
 }
