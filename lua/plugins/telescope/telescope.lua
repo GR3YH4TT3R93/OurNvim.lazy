@@ -1,17 +1,17 @@
 return {
   "nvim-telescope/telescope.nvim",
-  tag = "0.1.5",
+  branch = "0.1.x",
+  lazy = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "debugloop/telescope-undo.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
   },
   config = function()
     require("telescope").setup({
       -- pickers ={
       --   find_files = {
-      --     prompt_prefix = "🔍",
+          -- prompt_prefix = "🔍",
       --   },
       -- },
       fzf = {
@@ -28,7 +28,6 @@ return {
         undo = {}
       },
     })
-    require("telescope").load_extension("fzf")
     require("telescope").load_extension("undo")
     require("telescope").load_extension("ui-select")
   end,
