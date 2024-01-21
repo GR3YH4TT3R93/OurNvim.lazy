@@ -1,6 +1,7 @@
 return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
+  commit = "f197a15b0d1e8d555263af20add51450e5aaa1f0",
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
     'windwp/nvim-ts-autotag',
@@ -16,6 +17,7 @@ return {
     local configs = require("nvim-treesitter.configs")
     require('Comment').setup()
     configs.setup({
+      ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "vue", "typescript", "html", "css", "markdown", "json", "bash", "go", },
       auto_install = true,
       sync_install = false,
       ignore_install = {},
