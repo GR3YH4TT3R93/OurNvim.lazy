@@ -54,7 +54,7 @@ return {
           client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
             Lua = {
               diagnostics = {
-                globals = { "vim", "bufnr", "tabline", "winbar" }
+                globals = { "vim", "bufnr" }
               },
               runtime = {
                 -- Tell the language server which version of Lua you're using
