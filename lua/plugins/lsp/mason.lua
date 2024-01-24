@@ -3,7 +3,7 @@ return {
   dependencies = {
   "neovim/nvim-lspconfig",
   "williamboman/mason-lspconfig.nvim",
-  -- { "VonHeikemen/lsp-zero.nvim", branch = 'v3.x', }
+  -- { "VonHeikemen/lsp-zero.nvim", branch = "v3.x", }
   },
   -- event = { "BufReadPre", "BufNewFile" },
   config = function()
@@ -69,7 +69,7 @@ return {
                   -- "${3rd}/luv/library"
                   -- "${3rd}/busted/library",
                 }
-                -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+                -- or pull in all of "runtimepath". NOTE: this is a lot slower
                 -- library = vim.api.nvim_get_runtime_file("", true)
               }
             }

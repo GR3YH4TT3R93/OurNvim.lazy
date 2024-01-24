@@ -30,7 +30,7 @@ return {
         lualine_c = { { "filename", path = 0 } },
         lualine_x = {
           {
-            'copilot',
+            "copilot",
             -- Default values
             symbols = {
               status = {
@@ -55,9 +55,9 @@ return {
             show_colors = true,
             show_loading = true
           },
-          'encoding',
-          'fileformat',
-          'filetype'
+          "encoding",
+          "fileformat",
+          "filetype"
         },
       lualine_y = { "progress" },
       lualine_z = { "location" },
