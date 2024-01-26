@@ -156,11 +156,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 --}}}
-
--- UUID Commands REQUIRES OSSP-UUID {{{
--- Insert mode mapping
-vim.keymap.set("i", "<C-u>", [[<C-R>=trim(system("uuid -v 4"))<CR>]], opts)
-
--- Normal mode mapping
-vim.keymap.set("n", "<C-u>", [[i<C-R>=trim(system("uuid -v 4"))<CR><Esc>]], opts)
---}}}

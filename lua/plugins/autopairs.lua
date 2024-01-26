@@ -2,7 +2,6 @@ return {
   "windwp/nvim-autopairs",
   event = "InsertEnter",
   config = function()
-    local remap = vim.api.nvim_set_keymap
     local npairs = require("nvim-autopairs")
     local Rule = require("nvim-autopairs.rule")
     local cond = require("nvim-autopairs.conds")
@@ -22,19 +21,6 @@ return {
       Rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node({ "string", "comment" })),
       Rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node({ "function" })),
     })
-    -- skip it, if you use another global object
-    _G.MUtils = {}
-
-    -- new version for custom pum
-    MUtils.completion_confirm = function()
-      if vim.fn["coc#pum#visible"]() ~= 0 then
-        return vim.fn["coc#pum#confirm"]()
-      else
-        return npairs.autopairs_cr()
-      end
-    end
-
-    remap("i", "<CR>", "v:lua.MUtils.completion_confirm()", { expr = true, noremap = true })
 
     -- change default fast_wrap
     npairs.setup({
