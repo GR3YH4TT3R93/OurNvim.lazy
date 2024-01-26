@@ -7,7 +7,7 @@ return {
     "typescriptreact",
     "handlebars",
     "html",
-    "vue"
+    "vue",
   },
   config = function()
     require("nvim-ts-autotag").setup()

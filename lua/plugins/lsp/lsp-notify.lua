@@ -5,5 +5,5 @@ return {
     require("lsp-notify").setup({
       notify = require("notify"),
     })
-  end
+  end,
 }

@@ -1,7 +1,7 @@
 return {
   "sontungexpt/stcursorword",
   config = function()
-    require("stcursorword").setup{}
+    require("stcursorword").setup({})
     -- code
-  end
+  end,
 }
