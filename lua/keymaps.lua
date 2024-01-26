@@ -98,11 +98,12 @@ vim.keymap.set("n", "<leader>lf", ":EslintFixAll<CR>", opts)
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.tsx", "*.ts", "*.jsx", "*.js", "*.vue" },
   command = "silent! EslintFixAll",
-  group = vim.api.nvim_create_augroup("MyAutocmdsJavaScripFormatting", {}),
+  -- group = vim.api.nvim_create_augroup("MyAutocmdsJavaScripFormatting", {}),
 })
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
   pattern = { "*.tsx", "*.ts", "*.jsx", "*.js", "*.vue" },
   command = "silent! EslintFixAll<CR>",
+  -- group = vim.api.nvim_create_augroup("MyAutocmdsJavaScripFormatting", {}),
 })
 -- }}}
 
