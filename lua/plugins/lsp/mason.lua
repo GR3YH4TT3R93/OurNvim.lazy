@@ -9,33 +9,40 @@ return {
   config = function()
     local null_ls = require("null-ls")
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
     require("mason").setup({})
+
     require("mason-null-ls").setup({
       ensure_installed = {
         -- Opt to list sources here, when available in mason.
-        -- "prettier",
-        "eslint-lsp",
+        "prettierd",
+        "eslint_d",
       },
       automatic_installation = { exclude = { "stylua", "gitsigns" } },
       handlers = {},
     })
+
     require("null-ls").setup({
       sources = {
         -- Anything not supported by mason.
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.code_actions.gitsigns,
       },
-      -- you can reuse a shared lspconfig on_attach callback here
-      on_attach = function(client, bufnr)
-        if client.supports_method("textDocument/formatting") then
+      -- Format on save using null-ls instead of lsp server.
+      on_attach = function(current_client, bufnr)
+        if current_client.supports_method("textDocument/formatting") then
           vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
           vim.api.nvim_create_autocmd("BufWritePre", {
             group = augroup,
             buffer = bufnr,
             callback = function()
-              -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-              -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
-              vim.lsp.buf.format({ async = false })
+              vim.lsp.buf.format({
+                filter = function(client)
+                  --  only use null-ls for formatting instead of lsp server
+                  return client.name == "null-ls"
+                end,
+                bufnr = bufnr,
+              })
             end,
           })
         end
@@ -43,7 +50,14 @@ return {
     })
 
     require("mason-lspconfig").setup({
-      ensure_installed = { "volar", "tailwindcss", "tsserver", "bashls", "jsonls" },
+      ensure_installed = {
+        -- Servers that are installed by default in mason.
+        "volar",
+        "tsserver",
+        "tailwindcss",
+        "bashls",
+        "jsonls",
+      },
       automatic_installation = { exclude = "lua_ls" },
       handlers = {
         -- The first entry (without a key) will be the default handler
@@ -60,6 +74,7 @@ return {
       },
     })
 
+    -- Servers that are not installed by mason.
     require("lspconfig").lua_ls.setup({
       on_init = function(client)
         local path = client.workspace_folders[1].name
