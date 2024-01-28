@@ -6,7 +6,6 @@ return {
     "windwp/nvim-ts-autotag",
     "JoosepAlviste/nvim-ts-context-commentstring",
     "numToStr/Comment.nvim",
-    -- lazy = false,
   },
   config = function()
     local configs = require("nvim-treesitter.configs")

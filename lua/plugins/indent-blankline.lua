@@ -1,6 +1,8 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
   main = "ibl",
+  Lazy = true,
+  event = "BufReadPre",
   config = function()
     local highlight = {
       "RainbowRed",
@@ -30,7 +32,7 @@ return {
       indent = {
         highlight = highlight,
         char = "│",
-        tab_char = "│",
+        tab_char = " ",
       },
       scope = {
         char = "┃",

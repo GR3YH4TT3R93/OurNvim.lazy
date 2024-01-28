@@ -1,5 +1,7 @@
 return {
   "AckslD/nvim-neoclip.lua",
+  lazy = true,
+  event = "BufRead",
   dependencies = { "kkharji/sqlite.lua" },
   config = function()
     require("neoclip").setup({

@@ -1,5 +1,7 @@
 return {
   "windwp/nvim-ts-autotag",
+  Lazy = true,
+  event = "InsertEnter",
   ft = {
     "javascript",
     "javascriptreact",
