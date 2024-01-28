@@ -72,7 +72,7 @@ return {
       },
       preselect = cmp.PreselectMode.item,
       completion = {
-        -- completeopt = "menu,menuone,noinsert",
+        completeopt = "menu,menuone,noinsert",
       },
       experimental = {
         ghost_text = { hlgroup = string },

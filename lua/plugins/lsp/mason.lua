@@ -43,7 +43,7 @@ return {
     })
 
     require("mason-lspconfig").setup({
-      ensure_installed = { "volar", "tailwindcss", "tsserver" },
+      ensure_installed = { "volar", "tailwindcss", "tsserver", "bashls", "jsonls" },
       automatic_installation = { exclude = "lua_ls" },
       handlers = {
         -- The first entry (without a key) will be the default handler
