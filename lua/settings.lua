@@ -28,4 +28,3 @@ vim.opt.clipboard:append({ "unnamed", "unnamedplus" })
 vim.lsp.set_log_level("OFF")
 vim.notify = require("notify")
 vim.o.pumblend = 1
-vim.g.loaded_perl_provider = 0
