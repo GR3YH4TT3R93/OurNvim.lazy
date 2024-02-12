@@ -10,7 +10,7 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-emoji",
-    "GR3YH4TT3R93/friendly-snippets",
+    "rafamadriz/friendly-snippets",
     "honza/vim-snippets",
   },
   config = function()
@@ -103,8 +103,6 @@ return {
           s = cmp.mapping.confirm({ select = true }),
           c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
         }),
-
-        -- ["<Tab>"] = cmp.mapping(cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }), { "i" }),
 
         -- Super Tab Completion
         ["<Tab>"] = cmp.mapping(function(fallback)
