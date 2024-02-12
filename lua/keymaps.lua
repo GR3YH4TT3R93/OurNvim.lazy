@@ -52,9 +52,9 @@ vim.keymap.set("i", "<C-x>", "<esc> :x<cr>", opts)
 --}}}
 
 -- ToggleTerm Commands{{{
-vim.keymap.set("n", "<leader>d", ':TermExec cmd="prd"<CR>')
-vim.keymap.set("i", "<leader>d", ':TermExec cmd="prd"<CR>i')
-vim.keymap.set("n", "<leader>t", ":ToggleTerm<CR>")
+vim.keymap.set("n", "<leader>d", ':TermExec cmd="prd"<CR>', opts)
+vim.keymap.set("i", "<leader>d", ':TermExec cmd="prd"<CR>i', opts)
+vim.keymap.set("n", "<leader>t", ":ToggleTerm<CR>", opts)
 -- }}}
 
 -- Telescope Commands{{{
