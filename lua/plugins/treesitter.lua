@@ -22,6 +22,7 @@ return {
         "css",
         "markdown",
         "json",
+        "jsonc",
         "bash",
         "go",
         "gitcommit",
