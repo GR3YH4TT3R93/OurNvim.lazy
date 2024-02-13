@@ -40,9 +40,9 @@ vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", opts)
 --}}}
 
 -- Write Quit eXit {{{
-vim.keymap.set("n", "<C-w>", ":w<cr>", opts)
-vim.keymap.set("v", "<C-w>", "<esc> :w<cr>", opts)
-vim.keymap.set("i", "<C-w>", "<esc> :w<cr>", opts)
+vim.keymap.set("n", "<C-w>", ":w | e | TSBufEnable highlight<cr>", opts)
+vim.keymap.set("v", "<C-w>", "<esc> :w | e | TSBufEnable highlight<cr>", opts)
+vim.keymap.set("i", "<C-w>", "<esc> :w | e | TSBufEnable highlight<cr>", opts)
 vim.keymap.set("n", "<C-q>", ":q!<cr>", opts)
 vim.keymap.set("v", "<C-q>", "<esc> :q!<cr>", opts)
 vim.keymap.set("i", "<C-q>", "<esc> :q!<cr>", opts)
