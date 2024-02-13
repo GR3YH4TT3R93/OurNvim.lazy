@@ -72,12 +72,12 @@ return {
         lualine_z = {},
       },
       tabline = {
-        lualine_a = { { "buffers", mode = 2 } },
+        lualine_a = { { "buffers", hide_filename_extension = true, mode = 2 } },
         lualine_x = {},
         lualine_y = {},
         lualine_z = { "tabs" },
       },
-      extensions = { "lazy", "neo-tree", "toggleterm" },
+      extensions = { "lazy", "mason", "neo-tree", "toggleterm" },
     })
   end,
 }
