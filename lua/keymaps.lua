@@ -5,10 +5,10 @@ local extensions = require("telescope").extensions
 --}}}
 
 -- Scroll with Mouse {{{
-vim.api.nvim_set_keymap("", "<ScrollWheelUp>", "<C-Y>", opts)
-vim.api.nvim_set_keymap("i", "<ScrollWheelUp>", "<Esc><C-Y>", opts)
-vim.api.nvim_set_keymap("", "<ScrollWheelDown>", "<C-E>", opts)
-vim.api.nvim_set_keymap("i", "<ScrollWheelDown>", "<Esc><C-E>", opts)
+vim.keymap.set("", "<ScrollWheelUp>", "<C-Y>", opts)
+vim.keymap.set("i", "<ScrollWheelUp>", "<Esc><C-Y>", opts)
+vim.keymap.set("", "<ScrollWheelDown>", "<C-E>", opts)
+vim.keymap.set("i", "<ScrollWheelDown>", "<Esc><C-E>", opts)
 -- }}}
 
 -- Move Commands{{{
