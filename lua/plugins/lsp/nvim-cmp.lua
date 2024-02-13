@@ -11,7 +11,6 @@ return {
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-emoji",
     "rafamadriz/friendly-snippets",
-    "honza/vim-snippets",
   },
   config = function()
     local cmp = require("cmp")
@@ -48,7 +47,6 @@ return {
     luasnip.config.setup({})
     luasnip.filetype_extend("vue", { "nuxt_js_ts", "nuxt_html" })
 
-    require("luasnip.loaders.from_snipmate").lazy_load()
     require("luasnip.loaders.from_vscode").lazy_load()
 
     local has_words_before = function()
