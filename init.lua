@@ -16,6 +16,7 @@ require("lazy").setup({
     { import = "plugins" },
     { import = "plugins.lsp" },
     { import = "plugins.git" },
+    { import = "plugins.theme" },
     { import = "plugins.telescope" },
   },
   change_detection = { notify = false },
