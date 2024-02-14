@@ -45,7 +45,6 @@ return {
     }
 
     luasnip.config.setup({})
-    luasnip.filetype_extend("vue", { "nuxt_js_ts", "nuxt_html" })
 
     require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -67,7 +66,6 @@ return {
           return item
         end,
       },
-      preselect = cmp.PreselectMode.item,
       completion = {
         completeopt = "menu,menuone,noinsert",
       },
