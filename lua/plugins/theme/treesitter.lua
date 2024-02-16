@@ -37,6 +37,7 @@ return {
       ignore_install = {},
       highlight = { enable = true },
       indent = { enable = true },
+      autotag = { enable = true },
       modules = {},
       incremental_selection = {
         enable = true,
