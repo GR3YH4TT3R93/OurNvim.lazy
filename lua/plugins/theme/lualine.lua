@@ -77,7 +77,7 @@ return {
         lualine_y = {},
         lualine_z = { "tabs" },
       },
-      extensions = { "lazy", "mason", "neo-tree", "toggleterm" },
+      extensions = { "lazy", "mason", "neo-tree", "toggleterm", "trouble" },
     })
   end,
 }
