@@ -5,6 +5,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "jay-babu/mason-null-ls.nvim",
     "nvimtools/none-ls.nvim",
+    "nvimtools/none-ls-extras.nvim",
     "RubixDev/mason-update-all",
   },
   config = function()
@@ -17,7 +18,6 @@ return {
       ensure_installed = {
         -- Opt to list sources here, when available in mason.
         "prettierd",
-        "eslint_d",
       },
       automatic_installation = { exclude = { "stylua", "gitsigns" } },
       handlers = {},
@@ -28,6 +28,7 @@ return {
         -- Anything not supported by mason.
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.code_actions.gitsigns,
+        require('none-ls.diagnostics.eslint_d'),
       },
       -- Format on save using null-ls instead of lsp server.
       on_attach = function(current_client, bufnr)
