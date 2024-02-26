@@ -4,7 +4,7 @@ return {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "jay-babu/mason-null-ls.nvim",
-    "nvimtools/none-ls.nvim",
+    { "nvimtools/none-ls.nvim", commit = "bb680d752cec37949faca7a1f509e2fe67ab418a" },
     "RubixDev/mason-update-all",
   },
   config = function()
