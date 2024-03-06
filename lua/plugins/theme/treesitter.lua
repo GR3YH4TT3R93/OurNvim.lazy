@@ -1,5 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  tag = "v0.9.2",
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
     "windwp/nvim-ts-autotag",

@@ -1,10 +1,11 @@
 return {
-  "neovim/nvim-lspconfig",
+  "williamboman/mason.nvim",
   dependencies = {
-    "williamboman/mason.nvim",
+    "neovim/nvim-lspconfig",
     "williamboman/mason-lspconfig.nvim",
     "jay-babu/mason-null-ls.nvim",
-    { "nvimtools/none-ls.nvim", commit = "bb680d752cec37949faca7a1f509e2fe67ab418a" },
+    "nvimtools/none-ls.nvim",
+    "nvimtools/none-ls-extras.nvim",
     "RubixDev/mason-update-all",
   },
   config = function()
@@ -28,6 +29,9 @@ return {
         -- Anything not supported by mason.
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.code_actions.gitsigns,
+        require("none-ls.diagnostics.eslint_d"),
+        require("none-ls.formatting.eslint_d"),
+        require("none-ls.code_actions.eslint_d"),
       },
       -- Format on save using null-ls instead of lsp server.
       on_attach = function(current_client, bufnr)
