@@ -20,8 +20,9 @@ return {
         -- Opt to list sources here, when available in mason.
         "prettierd",
         "eslint_d",
+        "stylua",
       },
-      automatic_installation = { exclude = { "stylua", "gitsigns" } },
+      automatic_installation = { exclude = { "gitsigns" } },
       handlers = {},
     })
 
@@ -63,8 +64,9 @@ return {
         "tailwindcss",
         "bashls",
         "jsonls",
+        "lua_ls",
       },
-      automatic_installation = { exclude = "lua_ls" },
+      automatic_installation = true,
       handlers = {
         -- The first entry (without a key) will be the default handler
         -- and will be called for each installed server that doesn't have
