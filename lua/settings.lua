@@ -14,7 +14,6 @@ vim.o.relativenumber = true
 vim.o.cursorline = true
 vim.o.scrolloff = 999
 vim.o.foldmethod = "marker"
-vim.o.compatible = false
 vim.o.wrap = true
 vim.o.linebreak = true
 vim.o.textwidth = 80
