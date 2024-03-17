@@ -11,6 +11,7 @@ return {
   config = function()
     local null_ls = require("null-ls")
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+    local home = os.getenv("HOME")
 
     require("mason").setup({})
     require("mason-update-all").setup({})
@@ -102,6 +103,25 @@ return {
                   },
                 },
               },
+            },
+          })
+        end,
+        ["tsserver"] = function()
+          require("lspconfig").tsserver.setup({
+            init_options = {
+              plugins = {
+                {
+                  name = "@vue/typescript-plugin",
+                  -- Change this to the location the plugin is installed to
+                  location = home .. "/.local/share/nvm/versions/node/v21.7.1/lib/node_modules/@vue/typescript-plugin",
+                  languages = { "javascript", "typescript", "vue" },
+                },
+              },
+            },
+            filetypes = {
+              "javascript",
+              "typescript",
+              "vue",
             },
           })
         end,
