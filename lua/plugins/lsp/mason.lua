@@ -128,6 +128,25 @@ return {
             capabilities = capabilities,
           })
         end,
+        ["tsserver"] = function()
+          require("lspconfig").tsserver.setup({
+            init_options = {
+              plugins = {
+                {
+                  name = "@vue/typescript-plugin",
+                  -- Change this to the location the plugin is installed to
+                  location = home .. "/.local/share/nvm/versions/node/v21.7.1/lib/node_modules/@vue/typescript-plugin",
+                  languages = { "javascript", "typescript", "vue" },
+                },
+              },
+            },
+            filetypes = {
+              "javascript",
+              "typescript",
+              "vue",
+            },
+          })
+        end,
       },
     })
 
