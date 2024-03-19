@@ -128,7 +128,7 @@ return {
         { name = "copilot", group_index = 1 },
         { name = "nvim_lsp", group_index = 3 },
         { name = "luasnip", group_index = 2 },
-        { name = "cmdline", group_index = 5 },
+        -- { name = "cmdline", group_index = 5 },
         { name = "buffer", group_index = 4 },
         { name = "path", group_index = 6 },
         { name = "emoji", group_index = 7 },
