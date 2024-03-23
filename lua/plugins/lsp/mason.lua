@@ -128,22 +128,16 @@ return {
             capabilities = capabilities,
           })
         end,
-        ["tsserver"] = function()
-          require("lspconfig").tsserver.setup({
+        ["volar"] = function()
+          require("lspconfig").volar.setup({
+            filetypes = { "vue", "javascript", "typescript", "typescriptreact" },
             init_options = {
-              plugins = {
-                {
-                  name = "@vue/typescript-plugin",
-                  -- Change this to the location the plugin is installed to
-                  location = home .. "/.local/share/nvm/versions/node/v21.7.1/lib/node_modules/@vue/typescript-plugin",
-                  languages = { "javascript", "typescript", "vue" },
-                },
+              vue = {
+                hybridMode = false,
               },
-            },
-            filetypes = {
-              "javascript",
-              "typescript",
-              "vue",
+              typescript = {
+                tsdk = vim.fn.getcwd() .. "node_modules/typescript",
+              },
             },
           })
         end,
