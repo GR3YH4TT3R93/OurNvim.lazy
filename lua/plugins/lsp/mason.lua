@@ -11,7 +11,7 @@ return {
   config = function()
     local null_ls = require("null-ls")
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-    local prefix = os.getenv("PREFIX")
+    -- local prefix = os.getenv("PREFIX")
 
     require("mason").setup({})
     require("mason-update-all").setup({})
@@ -77,23 +77,36 @@ return {
         -- ["rust_analyzer"] = function ()
         --     require("rust-tools").setup {}
         -- end
-        ["tsserver"] = function()
-          require("lspconfig").tsserver.setup({
+        -- ["tsserver"] = function()
+        --   require("lspconfig").tsserver.setup({
+        --     init_options = {
+        --       plugins = {
+        --         {
+        --           name = "@vue/typescript-plugin",
+        --           -- Change this to the location the plugin is installed to this
+        --           -- is the standard location for npm i -g
+        --           location = prefix .. "/lib/node_modules/@vue/typescript-plugin",
+        --           languages = { "javascript", "typescript", "vue" },
+        --         },
+        --       },
+        --     },
+        --     filetypes = {
+        --       "javascript",
+        --       "typescript",
+        --       "vue",
+        --     },
+        --   })
+        -- end,
+        ["volar"] = function()
+          require("lspconfig").volar.setup({
+            filetypes = { "vue", "javascript", "typescript", "typescriptreact", "javascriptreact" },
             init_options = {
-              plugins = {
-                {
-                  name = "@vue/typescript-plugin",
-                  -- Change this to the location the plugin is installed to this
-                  -- is the standard location for npm i -g
-                  location = prefix .. "/lib/node_modules/@vue/typescript-plugin",
-                  languages = { "javascript", "typescript", "vue" },
-                },
+              vue = {
+                hybridMode = false,
               },
-            },
-            filetypes = {
-              "javascript",
-              "typescript",
-              "vue",
+              typescript = {
+                tsdk = vim.fn.getcwd() .. "node_modules/typescript/lib",
+              },
             },
           })
         end,
