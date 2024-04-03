@@ -30,6 +30,7 @@ return {
         -- Anything not supported by mason.
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.code_actions.gitsigns,
+        null_ls.builtins.diagnostics.zsh,
         require("none-ls.diagnostics.eslint_d"),
         require("none-ls.formatting.eslint_d"),
         require("none-ls.code_actions.eslint_d"),
@@ -77,26 +78,6 @@ return {
         -- ["rust_analyzer"] = function ()
         --     require("rust-tools").setup {}
         -- end
-        -- ["tsserver"] = function()
-        --   require("lspconfig").tsserver.setup({
-        --     init_options = {
-        --       plugins = {
-        --         {
-        --           name = "@vue/typescript-plugin",
-        --           -- Change this to the location the plugin is installed to this
-        --           -- is the standard location for npm i -g
-        --           location = prefix .. "/lib/node_modules/@vue/typescript-plugin",
-        --           languages = { "javascript", "typescript", "vue" },
-        --         },
-        --       },
-        --     },
-        --     filetypes = {
-        --       "javascript",
-        --       "typescript",
-        --       "vue",
-        --     },
-        --   })
-        -- end,
         ["volar"] = function()
           require("lspconfig").volar.setup({
             filetypes = { "vue", "javascript", "typescript", "javascriptreact", "typescriptreact" },
@@ -120,9 +101,6 @@ return {
         if not vim.loop.fs_stat(path .. "/.luarc.json") and not vim.loop.fs_stat(path .. "/.luarc.jsonc") then
           client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
             Lua = {
-              diagnostics = {
-                globals = { "vim", "bufnr" },
-              },
               runtime = {
                 -- Tell the language server which version of Lua you're using
                 -- (most likely LuaJIT in the case of Neovim)
@@ -133,7 +111,7 @@ return {
                 checkThirdParty = false,
                 library = {
                   vim.env.VIMRUNTIME,
-                  -- "${3rd}/luv/library"
+                  "${3rd}/luv/library",
                   -- "${3rd}/busted/library",
                 },
                 -- or pull in all of "runtimepath". NOTE: this is a lot slower
