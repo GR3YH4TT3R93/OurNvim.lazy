@@ -54,6 +54,14 @@ return {
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
+    -- Strict Line Checking
+    -- local has_words_before = function()
+    --   unpack = unpack or table.unpack
+    --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    --   local line_content = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
+    --   return col > 1 and line_content:sub(1, col - 1):match("%S") ~= nil
+    -- end
+
     cmp.setup({
       formatting = {
         fields = { "kind", "abbr", "menu" }, -- order of columns,
