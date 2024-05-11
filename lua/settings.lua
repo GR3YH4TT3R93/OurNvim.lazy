@@ -24,7 +24,7 @@ vim.o.expandtab = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.softtabstop = 2
-vim.opt.clipboard:append({ "unnamed", "unnamedplus" })
+vim.opt.clipboard = { "unnamed", "unnamedplus" }
 vim.lsp.set_log_level("OFF")
 vim.notify = require("notify")
 vim.o.pumblend = 1
