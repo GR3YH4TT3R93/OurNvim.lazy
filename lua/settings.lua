@@ -1,6 +1,5 @@
 vim.o.encoding = "utf-8"
 vim.o.termguicolors = true
-vim.o.termguicolors = true
 vim.o.updatetime = 100
 vim.o.autowrite = true
 -- vim.o.autochdir = true
