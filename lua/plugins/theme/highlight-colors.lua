@@ -4,6 +4,9 @@ return {
   lazy = true,
   event = "BufReadPre",
   config = function()
-    require("nvim-highlight-colors").setup({ enable_tailwind = true })
+    require("nvim-highlight-colors").setup({
+      render = "foreground",
+      enable_tailwind = true,
+    })
   end,
 }
