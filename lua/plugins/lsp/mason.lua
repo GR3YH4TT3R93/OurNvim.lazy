@@ -19,7 +19,7 @@ return {
     require("mason-null-ls").setup({
       ensure_installed = {
         -- Opt to list sources here, when available in mason.
-        "prettierd",
+        -- "prettierd",
         "eslint_d",
         "stylua",
       },
@@ -62,7 +62,7 @@ return {
       ensure_installed = {
         -- Servers that are installed by default in mason.
         "volar",
-        "tsserver",
+        -- "tsserver",
         "tailwindcss",
         "bashls",
         "jsonls",
