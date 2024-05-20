@@ -3,7 +3,6 @@ return {
   -- tag = "v0.9.2",
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    "windwp/nvim-ts-autotag",
     "JoosepAlviste/nvim-ts-context-commentstring",
     "numToStr/Comment.nvim",
   },
@@ -38,7 +37,6 @@ return {
       ignore_install = {},
       highlight = { enable = true },
       indent = { enable = true },
-      autotag = { enable = true },
       modules = {},
       incremental_selection = {
         enable = true,
