@@ -58,21 +58,23 @@ vim.keymap.set("n", "<leader>t", ":ToggleTerm<CR>", opts)
 -- }}}
 
 -- Telescope Commands{{{
-vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-vim.keymap.set("n", "<leader>fgg", builtin.git_files, {})
-vim.keymap.set("n", "<leader>fgs", builtin.git_stash, {})
-vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-vim.keymap.set("n", "<leader>fk", builtin.keymaps, {})
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
-vim.keymap.set("n", "<leader>fd", builtin.lsp_definitions, {})
-vim.keymap.set("n", "<leader>fdt", builtin.lsp_type_definitions, {})
-vim.keymap.set("n", "<leader>fr", builtin.lsp_references, {})
-vim.keymap.set("n", "<leader>fdi", builtin.diagnostics, {})
-vim.keymap.set("n", "<leader>fqf", builtin.quickfix, {})
-vim.keymap.set("n", "<leader>fqfh", builtin.quickfixhistory, {})
-vim.keymap.set("n", "<leader>fi", builtin.lsp_implementations, {})
-vim.keymap.set("n", "<leader>fy", extensions.neoclip.default, {})
+vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
+vim.keymap.set("n", "<leader>fgg", builtin.git_files, opts)
+vim.keymap.set("n", "<leader>fgs", builtin.git_stash, opts)
+vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
+vim.keymap.set("n", "<leader>fk", builtin.keymaps, opts)
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, opts)
+vim.keymap.set("n", "<leader>fd", builtin.lsp_definitions, opts)
+vim.keymap.set("n", "<leader>fdt", builtin.lsp_type_definitions, opts)
+vim.keymap.set("n", "<leader>fr", builtin.lsp_references, opts)
+vim.keymap.set("n", "<leader>fdi", builtin.diagnostics, opts)
+vim.keymap.set("n", "<leader>fqf", builtin.quickfix, opts)
+vim.keymap.set("n", "<leader>fqfh", builtin.quickfixhistory, opts)
+vim.keymap.set("n", "<leader>fi", builtin.lsp_implementations, opts)
+vim.keymap.set("n", "<leader>fy", extensions.neoclip.default, opts)
+vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, opts)
+vim.keymap.set("n", "<leader>u", extensions.undo.undo, opts)
 --}}}
 
 -- Nvim Space Folding{{{
@@ -129,9 +131,6 @@ vim.keymap.set("n", "<Leader>cw", "*Ncgn", opts)
 --}}}
 
 -- LSP Commands {{{
-vim.keymap.set("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
-vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
-vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
 
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "LSP actions",
@@ -141,6 +140,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- these will be buffer-local keybindings
     -- because they only work if you have an active language server
 
+    vim.keymap.set("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>", op)
+    vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", op)
+    vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", op)
     vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", op)
     vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", op)
     vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", op)
