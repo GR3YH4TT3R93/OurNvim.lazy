@@ -162,8 +162,8 @@ vim.keymap.set("n", "<leader>ts", ":write | edit | TSBufEnable highlight<CR>", o
 -- }}}
 
 -- Remap j and k to gj and gk {{{
-vim.keymap.set("n", "j", "gj", opts)
-vim.keymap.set("n", "k", "gk", opts)
+--[[ vim.keymap.set("n", "j", "gj", opts)
+vim.keymap.set("n", "k", "gk", opts) ]]
 -- }}}
 
 -- Trouble Commands {{{
@@ -187,3 +187,7 @@ vim.keymap.set("n", "gR", function()
   require("trouble").toggle("lsp_references")
 end)
 -- }}}
+
+-- VimBeGood Commands {{{
+vim.keymap.set("n", "<leader>vg", ":VimBeGood<CR>", opts)
+--}}}
