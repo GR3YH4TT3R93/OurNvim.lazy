@@ -18,6 +18,7 @@ return {
         "query",
         "vue",
         "typescript",
+        "javascript",
         "html",
         "css",
         "markdown",
