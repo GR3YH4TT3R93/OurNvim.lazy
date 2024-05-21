@@ -132,22 +132,22 @@ return {
         { name = "path", group_index = 5 },
         { name = "emoji", group_index = 6 },
       }),
-      -- Use buffer source for `/` and `?` and cmdline & path source for ":" (if you enabled `native_menu`, this won't work anymore).
-      cmp.setup.cmdline({ "/", "?", ":" }, {
+      -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline({ "/", "?" }, {
         mapping = cmp.mapping.preset.cmdline(),
-        sources = function(_, cmdline_mode)
-          if cmdline_mode == ":" then
-            return cmp.config.sources({
-              { name = "path" },
-            }, {
-              { name = "cmdline" },
-            })
-          else
-            return {
-              { name = "buffer" },
-            }
-          end
-        end,
+        sources = {
+          { name = "buffer" },
+        },
+      }),
+
+      -- Use cmdline & path source for ":" (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+        }, {
+          { name = "cmdline" },
+        }),
       }),
     })
   end,
