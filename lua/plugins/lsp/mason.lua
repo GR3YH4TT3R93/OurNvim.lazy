@@ -6,6 +6,7 @@ return {
     "jay-babu/mason-null-ls.nvim",
     "nvimtools/none-ls.nvim",
     "nvimtools/none-ls-extras.nvim",
+    "gbprod/none-ls-luacheck.nvim",
     "RubixDev/mason-update-all",
   },
   config = function()
@@ -34,6 +35,7 @@ return {
         require("none-ls.diagnostics.eslint_d"),
         require("none-ls.formatting.eslint_d"),
         require("none-ls.code_actions.eslint_d"),
+        require("none-ls-luacheck.diagnostics.luacheck"),
       },
       -- Format on save using null-ls instead of lsp server.
       on_attach = function(current_client, bufnr)
