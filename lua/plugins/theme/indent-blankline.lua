@@ -32,7 +32,7 @@ return {
       indent = {
         highlight = highlight,
         char = "│",
-        tab_char = " ",
+        tab_char = "│",
       },
       scope = {
         char = "┃",
