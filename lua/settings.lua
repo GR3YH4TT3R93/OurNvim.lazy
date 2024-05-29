@@ -28,5 +28,5 @@ o.autoindent = true
 o.pumblend = 1
 opt.clipboard = "unnamedplus"
 opt.inccommand = "nosplit"
-vim.lsp.set_log_level("OFF")
+vim.lsp.set_log_level("ERROR")
 vim.notify = require("notify")
