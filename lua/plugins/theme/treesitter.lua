@@ -63,6 +63,7 @@ return {
         },
       },
     }) -- Remove the trailing comma here
+    vim.treesitter.language.register("bash", "zsh")
   end,
   build = ":TSUpdate",
 }
