@@ -139,20 +139,53 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- these will be buffer-local keybindings
     -- because they only work if you have an active language server
+    -- Diagnostics with Trouble
+    -- LSP bindings
+    vim.keymap.set("n", "gd", function()
+      require("trouble").toggle("lsp_definitions")
+    end, op)
 
-    vim.keymap.set("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>", op)
-    vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", op)
-    vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", op)
-    vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", op)
-    vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", op)
-    vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", op)
-    vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", op)
-    vim.keymap.set("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", op)
-    vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", op)
-    vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", op)
-    vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", op)
-    vim.keymap.set({ "n", "x" }, "<leader>fm", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", op)
-    vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", op)
+    vim.keymap.set("n", "gD", function()
+      require("trouble").toggle("lsp_declarations")
+    end, op)
+
+    vim.keymap.set("n", "gi", function()
+      require("trouble").toggle("lsp_implementations")
+    end, op)
+
+    vim.keymap.set("n", "gt", function()
+      require("trouble").toggle("lsp_type_definitions")
+    end, op)
+
+    vim.keymap.set("n", "gr", function()
+      require("trouble").toggle("lsp_references")
+    end, op)
+
+    vim.keymap.set("n", "[d", function()
+      vim.diagnostic.goto_prev()
+    end, op)
+    vim.keymap.set("n", "]d", function()
+      vim.diagnostic.goto_next()
+    end, op)
+    vim.keymap.set("n", "K", function()
+      vim.lsp.buf.hover()
+    end, op)
+    vim.keymap.set("n", "gd", function()
+      vim.lsp.buf.definition()
+    end, op)
+    vim.keymap.set("n", "gs", function()
+      vim.lsp.buf.signature_help()
+    end, op)
+    vim.keymap.set("n", "<leader>rn", function()
+      vim.lsp.buf.rename()
+    end, op)
+    -- Format and Code Actions
+    vim.keymap.set({ "n", "x" }, "<leader>fm", function()
+      vim.lsp.buf.format({ async = true })
+    end, op)
+    vim.keymap.set("n", "<leader>ca", function()
+      vim.lsp.buf.code_action()
+    end, op)
   end,
 })
 --}}}
@@ -167,15 +200,8 @@ vim.keymap.set("n", "k", "gk", opts) ]]
 -- }}}
 
 -- Trouble Commands {{{
--- Lua
 vim.keymap.set("n", "<leader>xx", function()
-  require("trouble").toggle()
-end)
-vim.keymap.set("n", "<leader>xw", function()
-  require("trouble").toggle("workspace_diagnostics")
-end)
-vim.keymap.set("n", "<leader>xd", function()
-  require("trouble").toggle("document_diagnostics")
+  require("trouble").toggle("diagnostics")
 end)
 vim.keymap.set("n", "<leader>xq", function()
   require("trouble").toggle("quickfix")
