@@ -6,7 +6,7 @@ return {
       theme = "hyper", --  theme is doom and hyper default is hyper
       disable_move = false, --  default is false disable move keymap for hyper
       shortcut_type = "number", --  shorcut type "letter" or "number"
-      change_to_vcs_root = true, -- default is false,for open file in hyper mru. it will change to the root of vcs
+      change_to_vcs_root = false, -- default is false,for open file in hyper mru. it will change to the root of vcs
       config = { --  config used for theme
         header = {
           [[░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]],
@@ -23,10 +23,8 @@ return {
           [[]],
         },
         packages = { enable = true },
-        project = { enable = true, limit = 3 },
-        week_header = {
-          enable = false,
-        },
+        project = { enable = true },
+        week_header = { enable = false },
         shortcut = {
           {
             icon = "󰊳 ",
