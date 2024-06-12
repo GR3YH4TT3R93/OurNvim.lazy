@@ -13,8 +13,13 @@ return {
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         disabled_filetypes = {
-          statusline = { "neo-tree" },
-          winbar = { "neo-tree" },
+          statusline = { "neo-tree", "trouble", "toggleterm" },
+          winbar = { "neo-tree", "trouble", "toggleterm" },
+        },
+        filetype_names = {
+          dashboard = "Dashboard",
+          toggleterm = "ToggleTerm",
+          trouble = "Trouble",
         },
         ignore_focus = {},
         always_divide_middle = true,
@@ -31,16 +36,22 @@ return {
         lualine_c = { { "filename", path = 0 } },
         lualine_x = {
           {
+            require("lazy.status").updates,
+            cond = require("lazy.status").has_updates,
+            -- show_colors = true,
+            color = { fg = "#d19a66" },
+          },
+          {
             "copilot",
             -- Default values
             symbols = {
               status = {
                 icons = {
-                  enabled = " ",
-                  sleep = " ", -- auto-trigger disabled
-                  disabled = " ",
-                  warning = " ",
-                  unknown = " ",
+                  enabled = "",
+                  sleep = "", -- auto-trigger disabled
+                  disabled = "",
+                  warning = "",
+                  unknown = "",
                 },
                 hl = {
                   enabled = "#98c379",
@@ -50,18 +61,25 @@ return {
                   unknown = "#848b98",
                 },
               },
-              spinners = require("copilot-lualine.spinners").dots,
+              -- spinners = require("copilot-lualine.spinners").dots,
               spinner_color = "#5c6370",
             },
             show_colors = true,
             show_loading = true,
           },
-          "encoding",
+          -- "encoding",
           "fileformat",
           "filetype",
         },
         lualine_y = { "progress" },
-        lualine_z = { "location" },
+        lualine_z = {
+          {
+            "location",
+            fmt = function()
+              return "%l %c"
+            end,
+          },
+        },
       },
       inactive_sections = {
         lualine_a = {},

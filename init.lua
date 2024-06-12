@@ -20,10 +20,18 @@ require("lazy").setup({
     { import = "plugins.telescope" },
   },
   change_detection = { notify = false },
+  checker = { enabled = true, notify = false },
   install = {
     colorscheme = { "onedark" },
   },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "netrwPlugin",
+        "tutor",
+      },
+    },
+  },
 })
-
 require("settings")
 require("keymaps")
