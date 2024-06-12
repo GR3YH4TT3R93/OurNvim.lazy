@@ -156,6 +156,7 @@ return {
           require("mason-nvim-dap").default_setup(config)
         end,
       },
+      capabilities = capabilities,
     })
 
     require("dapui").setup()
