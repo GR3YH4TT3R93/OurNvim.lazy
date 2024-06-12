@@ -131,6 +131,22 @@ return {
       },
     })
 
+    require("mason-nvim-dap").setup({
+      handlers = {
+        function(config)
+          -- all sources with no handler get passed here
+
+          -- Keep original functionality
+          require("mason-nvim-dap").default_setup(config)
+        end,
+      },
+    })
+    require("dapui").setup()
+
+    -- Lazydev setup with nvim-dap-ui
+    require("lazydev").setup({
+      library = { "nvim-dap-ui" },
+    })
     -- Servers that are not installed by mason.
     require("lspconfig").lua_ls.setup({
       on_init = function(client)
