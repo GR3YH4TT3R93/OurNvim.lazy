@@ -77,7 +77,7 @@ return {
         lualine_y = {},
         lualine_z = { "tabs" },
       },
-      extensions = { "lazy", "mason", "neo-tree", "toggleterm", "trouble" },
+      extensions = { "lazy", "neo-tree", "toggleterm", "trouble", "nvim-dap-ui", "fzf" },
     })
   end,
 }

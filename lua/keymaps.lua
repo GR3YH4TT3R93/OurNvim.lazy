@@ -126,8 +126,47 @@ vim.api.nvim_create_autocmd("CursorHold", {
 })
 --}}}
 
+-- Notify Mason Update {{{
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MasonToolsUpdateCompleted",
+  callback = function(e)
+    vim.schedule(function()
+      if #e.data == 0 then
+        vim.notify("All LSP servers are up to date!", "info", { title = "mason-tool-installer" })
+      end
+    end)
+  end,
+})
+--}}}
+
+-- Restore Cursor Position {{{
+-- vim.api.nvim_create_autocmd("BufReadPost", {
+--   pattern = "*",
+--   callback = function()
+--     local row, col = unpack(vim.api.nvim_buf_get_mark(0, '"'))
+--     if { row, col } ~= { 0, 0 } then
+--       vim.api.nvim_win_set_cursor(0, { row, col })
+--     end
+--   end,
+-- })
+--}}}
+
 -- Replace Current Word {{{
 vim.keymap.set("n", "<Leader>cw", "*Ncgn", opts)
+--}}}
+
+-- Debugging Commands {{{
+vim.keymap.set("n", "<leader>db", ":lua require('dap').toggle()<CR>", opts)
+vim.keymap.set("n", "<leader>dr", ":lua require('dap').repl.toggle()<CR>", opts)
+vim.keymap.set("n", "<leader>di", ":lua require('dap').step_into()<CR>", opts)
+vim.keymap.set("n", "<leader>do", ":lua require('dap').step_over()<CR>", opts)
+vim.keymap.set("n", "<leader>ds", ":lua require('dap').step_out()<CR>", opts)
+vim.keymap.set("n", "<leader>dd", ":lua require('dap').step_back()<CR>", opts)
+vim.keymap.set("n", "<leader>dp", ":lua require('dap').pause()<CR>", opts)
+vim.keymap.set("n", "<leader>dc", ":lua require('dap').continue()<CR>", opts)
+vim.keymap.set("n", "<leader>dp", ":lua require('dap').toggle_breakpoint()<CR>", opts)
+vim.keymap.set("n", "<leader>du", ":lua require('dapui').toggle()<CR>", opts)
+vim.keymap.set("n", "<leader>de", ":lua require('dapui').eval()<CR>", opts)
 --}}}
 
 -- LSP Commands {{{
@@ -162,17 +201,30 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, op)
 
     vim.keymap.set("n", "[d", function()
-      vim.diagnostic.goto_prev()
+      if vim.tbl_isempty(vim.diagnostic.get(0)) then
+        require("trouble").close("diagnostics")
+        vim.notify("No diagnostic errors found", "info", { title = "Trouble" })
+      else
+        vim.diagnostic.goto_prev()
+        require("trouble").prev({ mode = "diagnostics" })
+      end
     end, op)
+
     vim.keymap.set("n", "]d", function()
-      vim.diagnostic.goto_next()
+      if vim.tbl_isempty(vim.diagnostic.get(0)) then
+        require("trouble").close("diagnostics")
+        vim.notify("No diagnostic errors found", "info", { title = "Trouble" })
+      else
+        vim.diagnostic.goto_next()
+        require("trouble").next({ mode = "diagnostics" })
+      end
     end, op)
     vim.keymap.set("n", "K", function()
       vim.lsp.buf.hover()
     end, op)
-    vim.keymap.set("n", "gd", function()
-      vim.lsp.buf.definition()
-    end, op)
+    -- vim.keymap.set("n", "gd", function()
+    --   vim.lsp.buf.definition()
+    -- end, op)
     vim.keymap.set("n", "gs", function()
       vim.lsp.buf.signature_help()
     end, op)
@@ -191,7 +243,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 --}}}
 
 -- Fix Treesitter Highlighting {{{
--- vim.keymap.set("n", "<leader>ts", ":write | edit | TSBufEnable highlight<CR>", opts)
+vim.keymap.set("n", "<leader>ts", ":write | edit | TSBufEnable highlight<CR>", opts)
 -- }}}
 
 -- Remap j and k to gj and gk {{{
