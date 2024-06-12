@@ -5,7 +5,7 @@
   },
   "workspace": {
     "library": [
-      "runtime/lua",
+      "/data/data/com.termux/files/usr/share/nvim/runtime/lua",
       "${3rd}/busted/library",
       "${3rd}/luv/library"
     ],
@@ -28,16 +28,16 @@
       "luadoc-miss-see-name"
     ],
     "globals": [
-        "exclude_files",
-        "globals",
-        "read_globals",
-        "ignore",
-        "cache",
-        "self",
-        "files",
-        "std",
-        "stds",
-            "vim"
+      "exclude_files",
+      "globals",
+      "read_globals",
+      "ignore",
+      "cache",
+      "self",
+      "files",
+      "std",
+      "stds",
+      "vim"
     ]
   }
 }
