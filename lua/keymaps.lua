@@ -11,9 +11,9 @@ vim.keymap.set("", "<ScrollWheelDown>", "<C-E>", opts)
 vim.keymap.set("i", "<ScrollWheelDown>", "<Esc><C-E>", opts)
 -- }}}
 
--- Move Commands{{{
+-- Move Commands {{{
 
--- Normal-mode commands{{{
+-- Normal-mode commands {{{
 vim.keymap.set("n", "<A-j>", ":MoveLine(1)<CR>", opts)
 vim.keymap.set("n", "<A-k>", ":MoveLine(-1)<CR>", opts)
 vim.keymap.set("n", "<A-h>", ":MoveHChar(-1)<CR>", opts)
@@ -22,7 +22,7 @@ vim.keymap.set("n", "<leader>wf", ":MoveWord(1)<CR>", opts)
 vim.keymap.set("n", "<leader>wb", ":MoveWord(-1)<CR>", opts)
 -- }}}
 
--- Visual-mode commands{{{
+-- Visual-mode commands {{{
 vim.keymap.set("v", "<A-j>", ":MoveBlock(1)<CR>", opts)
 vim.keymap.set("v", "<A-k>", ":MoveBlock(-1)<CR>", opts)
 vim.keymap.set("v", "<A-h>", ":MoveHBlock(-1)<CR>", opts)
@@ -31,18 +31,37 @@ vim.keymap.set("v", "<A-l>", ":MoveHBlock(1)<CR>", opts)
 
 --}}}
 
--- Neo Tree Commands{{{
+-- Neo Tree Commands {{{
 vim.keymap.set("n", "<C-n>", ":Neotree toggle<cr>", opts)
 -- }}}
 
--- LazyGit Commands{{{
+-- LazyGit Commands {{{
 vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", opts)
 --}}}
 
+-- Window Management {{{
+vim.keymap.set({ "n", "t" }, "<leader>h", "<C-w>h", opts)
+vim.keymap.set({ "n", "t" }, "<leader>j", "<C-w>j", opts)
+vim.keymap.set({ "n", "t" }, "<leader>k", "<C-w>k", opts)
+vim.keymap.set({ "n", "t" }, "<leader>l", "<C-w>l", opts)
+vim.keymap.set({ "n", "t" }, "<leader>s", "<C-w>s", opts)
+vim.keymap.set({ "n", "t" }, "<leader>v", "<C-w>v", opts)
+vim.keymap.set({ "n", "t" }, "<leader>x", "<C-w>c", opts)
+vim.keymap.set({ "n", "t" }, "<leader>w=", "<C-w>=", opts)
+vim.keymap.set({ "n", "t" }, "<leader>w-", "<C-w>-", opts)
+vim.keymap.set({ "n", "t" }, "<leader>w+", "<C-w>+", opts)
+vim.keymap.set({ "n", "t" }, "<leader>w<", "<C-w><", opts)
+vim.keymap.set({ "n", "t" }, "<leader>w>", "<C-w>>", opts)
+vim.keymap.set({ "n", "t" }, "<leader>w_", "<C-w>_", opts)
+vim.keymap.set({ "n", "t" }, "<leader>w|", "<C-w>|", opts)
+vim.keymap.set({ "n", "t" }, "<leader>w", [[<C-\><C-n><C-w>]], opts)
+vim.keymap.set({ "n", "t" }, "<esc><esc>", [[<C-\><C-n>]], opts)
+-- }}}
+
 -- Write Quit eXit {{{
-vim.keymap.set("n", "<C-w>", ":w | e | TSBufEnable highlight<cr>", opts)
-vim.keymap.set("v", "<C-w>", "<esc> :w | e | TSBufEnable highlight<cr>", opts)
-vim.keymap.set("i", "<C-w>", "<esc> :w | e | TSBufEnable highlight<cr>", opts)
+vim.keymap.set("n", "<C-W>", ":w | e | TSBufEnable highlight<cr>", opts)
+vim.keymap.set("v", "<C-W>", "<esc> :w | e | TSBufEnable highlight<cr>", opts)
+vim.keymap.set("i", "<C-W>", "<esc> :w | e | TSBufEnable highlight<cr>", opts)
 vim.keymap.set("n", "<C-q>", ":q!<cr>", opts)
 vim.keymap.set("v", "<C-q>", "<esc> :q!<cr>", opts)
 vim.keymap.set("i", "<C-q>", "<esc> :q!<cr>", opts)
@@ -51,16 +70,19 @@ vim.keymap.set("v", "<C-x>", "<esc> :x<cr>", opts)
 vim.keymap.set("i", "<C-x>", "<esc> :x<cr>", opts)
 --}}}
 
--- ToggleTerm Commands{{{
+-- ToggleTerm Commands {{{
 vim.keymap.set("n", "<leader>d", ':TermExec cmd="prd"<CR>', opts)
 vim.keymap.set("i", "<leader>d", ':TermExec cmd="prd"<CR>i', opts)
 vim.keymap.set("n", "<leader>t", ":ToggleTerm<CR>", opts)
+vim.keymap.set("n", "<leader>tx", ":ToggleTerm close<CR>", opts)
 -- }}}
 
--- Telescope Commands{{{
+-- Telescope Commands {{{
 vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
 vim.keymap.set("n", "<leader>fgg", builtin.git_files, opts)
+vim.keymap.set("n", "<leader>fgb", builtin.git_branches, opts)
+vim.keymap.set("n", "<leader>fgc", builtin.git_bcommits, opts)
 vim.keymap.set("n", "<leader>fgs", builtin.git_stash, opts)
 vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
 vim.keymap.set("n", "<leader>fk", builtin.keymaps, opts)
@@ -72,17 +94,18 @@ vim.keymap.set("n", "<leader>fdi", builtin.diagnostics, opts)
 vim.keymap.set("n", "<leader>fqf", builtin.quickfix, opts)
 vim.keymap.set("n", "<leader>fqfh", builtin.quickfixhistory, opts)
 vim.keymap.set("n", "<leader>fi", builtin.lsp_implementations, opts)
-vim.keymap.set("n", "<leader>fy", extensions.neoclip.default, opts)
 vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, opts)
-vim.keymap.set("n", "<leader>u", extensions.undo.undo, opts)
+vim.keymap.set("n", "<leader>fy", extensions.neoclip.default, opts)
+vim.keymap.set("n", "<leader>fu", extensions.undo.undo, opts)
+vim.keymap.set("n", "<leader>ft", ":TodoTelescope<CR>", opts)
 --}}}
 
--- Nvim Space Folding{{{
+-- Nvim Space Folding {{{
 vim.keymap.set("n", "<Space>", "@=(foldlevel('.')?'za':'\\<Space>')<CR>", opts)
 vim.keymap.set("v", "<Space>", "zf", opts)
 -- }}}
 
--- Close Current Buffer{{{
+-- Close Current Buffer {{{
 vim.keymap.set("n", "<leader>bd", ":bd<cr>", opts)
 vim.keymap.set("v", "<leader>bd", "<esc> :bd<cr>", opts)
 vim.keymap.set("i", "<leader>bd", "<esc> :bd<cr>", opts)
@@ -261,6 +284,16 @@ end)
 vim.keymap.set("n", "<leader>xl", function()
   require("trouble").toggle("loclist")
 end)
+-- }}}
+
+-- TODO Comments {{{
+vim.keymap.set("n", "]t", function()
+  require("todo-comments").jump_next()
+end, opts)
+
+vim.keymap.set("n", "[t", function()
+  require("todo-comments").jump_prev()
+end, opts)
 -- }}}
 
 -- VimBeGood Commands {{{

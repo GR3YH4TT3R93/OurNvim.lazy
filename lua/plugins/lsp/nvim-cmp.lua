@@ -84,22 +84,42 @@ return {
       mapping = cmp.mapping.preset.insert({
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
+        -- ["<C-Space>"] = cmp.mapping.complete(),
+        -- ["<CR>"] = cmp.mapping({
+        --   i = function(fallback)
+        --     if cmp.visible() and cmp.get_active_entry() then
+        --       cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+        --     elseif cmp.visible() and has_words_before() then
+        --       cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+        --     else
+        --       fallback()
+        --     end
+        --   end,
+        --   -- s = cmp.mapping.confirm({ select = true }),
+        --   -- c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
+        -- }),
+        -- v
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-i>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
+        ["<C-g>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping({
-          i = function(fallback)
-            if cmp.visible() and cmp.get_active_entry() then
-              cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-            elseif cmp.visible() and has_words_before() then
-              cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-            else
-              fallback()
-            end
-          end,
-          -- s = cmp.mapping.confirm({ select = true }),
-          -- c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
-        }),
-
+        ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-l>"] = cmp.mapping(function(fallback)
+          if luasnip.jumpable(1) then
+            luasnip.jump(1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<C-h>"] = cmp.mapping(function(fallback)
+          if luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
         -- Super Tab Completion
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
