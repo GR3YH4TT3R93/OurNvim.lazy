@@ -4,7 +4,8 @@ return {
     require("indent-o-matic").setup({
       -- Global settings (optional, used as fallback)
       max_lines = 2048,
-      standard_widths = { 2, 4, 8 },
+      standard_widths = { 2, 4 },
+      skip_multiline = true,
 
       -- Disable indent-o-matic for LISP files
       filetype_lisp = {
