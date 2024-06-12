@@ -26,6 +26,5 @@ o.autoindent = true
 -- o.shiftwidth = 2
 -- o.softtabstop = 2
 o.pumblend = 1
-opt.clipboard = "unnamedplus"
-vim.lsp.set_log_level("ERROR")
-vim.notify = require("notify")
+opt.clipboard:append("unnamedplus")
+vim.lsp.set_log_level("OFF")
