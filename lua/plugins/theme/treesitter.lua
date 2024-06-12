@@ -1,6 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   -- tag = "v0.9.2",
+  build = ":TSUpdate",
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
     "JoosepAlviste/nvim-ts-context-commentstring",
