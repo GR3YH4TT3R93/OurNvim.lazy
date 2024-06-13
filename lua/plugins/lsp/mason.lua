@@ -48,6 +48,7 @@ return {
         "luacheck",
         "stylua",
         "lua_ls",
+        "selene",
 
         -- JavaScript/TypeScript
         "eslint_d",
