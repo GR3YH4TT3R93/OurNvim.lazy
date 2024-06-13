@@ -103,7 +103,7 @@ return {
       -- see `:h neo-tree-custom-commands-global`
       commands = {},
       window = {
-        position = "left",
+        position = "float", -- "float" | "left" | "right" | "top" | "bottom"
         width = 30,
         mapping_options = {
           noremap = true,
@@ -116,6 +116,7 @@ return {
           },
           ["<2-LeftMouse>"] = "open",
           ["<cr>"] = "open",
+          ["<space>"] = "open",
           ["<esc>"] = "cancel", -- close preview or floating neo-tree window
           ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
           -- Read `# Preview Mode` for more information
