@@ -26,13 +26,16 @@ return {
         -- { "golangci-lint", version = "v1.47.0" },
         -- you can turn off/on auto_update per tool
         -- { "bashls", auto_update = true },
+
+        -- Bash
         "bashls",
         "shellcheck",
+
+        -- Go
         "gopls",
         "golangci-lint",
         "gotestsum",
         "nilaway",
-        "eslint_d",
         "gofumpt",
         "golines",
         "gomodifytags",
@@ -40,13 +43,19 @@ return {
         "impl",
         "json-to-struct",
         "staticcheck",
+
+        -- Lua
         "luacheck",
+        "stylua",
+        "lua_ls",
+
+        -- JavaScript/TypeScript
+        "eslint_d",
         "volar",
         "tailwindcss",
         "jsonls",
         "node-debug2-adapter",
-        -- "stylua",
-        -- "lua_ls",
+
         -- "vim-language-server",
         -- "editorconfig-checker",
         -- "misspell",
@@ -98,8 +107,13 @@ return {
       end,
     })
 
+    -- Lazydev setup with nvim-dap-ui
+    require("lazydev").setup({
+      library = { "nvim-dap-ui" },
+    })
+
     require("mason-lspconfig").setup({
-      automatic_installation = { exclude = "lua_ls" },
+      automatic_installation = true,
       handlers = {
         -- The first entry (without a key) will be the default handler
         -- and will be called for each installed server that doesn't have
@@ -128,19 +142,6 @@ return {
             capabilities = capabilities,
           })
         end,
-        ["volar"] = function()
-          require("lspconfig").volar.setup({
-            filetypes = { "vue", "javascript", "typescript", "typescriptreact" },
-            init_options = {
-              vue = {
-                hybridMode = false,
-              },
-              typescript = {
-                tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
-              },
-            },
-          })
-        end,
       },
     })
 
@@ -154,46 +155,7 @@ return {
         end,
       },
     })
+
     require("dapui").setup()
-
-    -- Lazydev setup with nvim-dap-ui
-    require("lazydev").setup({
-      library = { "nvim-dap-ui" },
-    })
-    -- Servers that are not installed by mason.
-    require("lspconfig").lua_ls.setup({
-      on_init = function(client)
-        local path = client.workspace_folders[1].name
-        if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
-          return
-        end
-
-        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-          runtime = {
-            -- Tell the language server which version of Lua you're using
-            -- (most likely LuaJIT in the case of Neovim)
-            version = "LuaJIT",
-          },
-          -- Make the server aware of Neovim runtime files
-          workspace = {
-            checkThirdParty = false,
-            library = {
-              -- vim.env.VIMRUNTIME,
-              -- Depending on the usage, you might want to add additional paths here.
-              -- "${3rd}/luv/library",
-              -- "${3rd}/busted/library",
-              -- "~/.local/share/nvim/lazy",
-            },
-          },
-          hint = {
-            enable = true,
-          },
-        })
-      end,
-      settings = {
-        Lua = {},
-      },
-      capabilities = capabilities,
-    })
   end,
 }

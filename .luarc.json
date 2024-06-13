@@ -5,7 +5,7 @@
   },
   "workspace": {
     "library": [
-      "/data/data/com.termux/files/usr/share/nvim/runtime/lua",
+      "/opt/nvim-linux64/share/nvim/runtime/lua",
       "${3rd}/busted/library",
       "${3rd}/luv/library"
     ],
