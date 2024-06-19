@@ -26,5 +26,6 @@ o.autoindent = true
 -- o.shiftwidth = 2
 -- o.softtabstop = 2
 o.pumblend = 1
+vim.g.loaded_ruby_provider = 0
 opt.clipboard:append("unnamedplus")
 vim.lsp.set_log_level("OFF")
