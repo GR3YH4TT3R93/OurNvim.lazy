@@ -9,6 +9,8 @@ return {
     "RRethy/nvim-treesitter-endwise",
   },
   config = function()
+    ---@class TSConfigs
+    ---@field setup fun(config: table)
     local configs = require("nvim-treesitter.configs")
     require("Comment").setup()
     configs.setup({
