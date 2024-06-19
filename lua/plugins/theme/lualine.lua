@@ -2,7 +2,6 @@ return {
   "nvim-lualine/lualine.nvim",
   event = "VimEnter",
   dependencies = {
-    { "nvim-tree/nvim-web-devicons" },
     { "AndreM222/copilot-lualine" },
   },
   config = function()
