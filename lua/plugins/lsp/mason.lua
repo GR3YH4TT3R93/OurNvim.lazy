@@ -123,7 +123,7 @@ return {
                 hybridMode = false,
               },
               typescript = {
-                tsdk = vim.fn.getcwd() .. "/node_modules/typescript",
+                tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
               },
             },
             capabilities = capabilities,
