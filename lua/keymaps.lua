@@ -55,7 +55,7 @@ vim.keymap.set({ "n", "t" }, "<leader>w>", "<C-w>>", opts)
 vim.keymap.set({ "n", "t" }, "<leader>w_", "<C-w>_", opts)
 vim.keymap.set({ "n", "t" }, "<leader>w|", "<C-w>|", opts)
 vim.keymap.set({ "n", "t" }, "<leader>w", [[<C-\><C-n><C-w>]], opts)
-vim.keymap.set({ "n", "t" }, "<esc><esc>", [[<C-\><C-n>]], opts)
+vim.keymap.set({ "t" }, "<esc><esc>", [[<C-\><C-n>]], opts)
 -- }}}
 
 -- Write Quit eXit {{{
