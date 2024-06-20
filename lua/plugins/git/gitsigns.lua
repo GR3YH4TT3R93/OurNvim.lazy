@@ -1,7 +1,7 @@
 return {
   "lewis6991/gitsigns.nvim", --git signs
   lazy = true,
-  event = "BufReadPre",
+  event = "VeryLazy",
   config = function()
     ---@type table<string, function|boolean>
     local gs = require("gitsigns")

@@ -2,7 +2,7 @@ return {
   "nvim-neo-tree/neo-tree.nvim",
   lazy = true,
   cmd = "Neotree",
-  event = "BufEnter",
+  event = "VeryLazy",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",

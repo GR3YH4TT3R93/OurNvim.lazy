@@ -155,7 +155,7 @@ vim.api.nvim_create_autocmd("User", {
   callback = function(e)
     vim.schedule(function()
       if #e.data == 0 then
-        vim.notify("All LSP servers are up to date!", "info", { title = "mason-tool-installer" })
+        vim.notify("All LSP servers are up-to-date!", 1, { title = "mason-tool-installer" })
       end
     end)
   end,
