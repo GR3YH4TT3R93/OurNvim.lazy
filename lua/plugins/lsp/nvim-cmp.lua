@@ -11,6 +11,7 @@ return {
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-emoji",
     "rafamadriz/friendly-snippets",
+    "rcarriga/cmp-dap",
   },
   config = function()
     local cmp = require("cmp")
@@ -49,14 +50,16 @@ return {
     require("luasnip.loaders.from_vscode").lazy_load()
 
     local has_words_before = function()
-      unpack = unpack
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
     cmp.setup({
+      enabled = function()
+        return vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt" or require("cmp_dap").is_dap_buffer()
+      end,
       formatting = {
-        fields = { "kind", "abbr", "menu" }, -- order of columns,
+        -- fields = { "kind", "abbr", "menu" }, -- order of columns,
         format = function(entry, item)
           item.menu = item.kind
           item = require("cmp-tailwind-colors").format(entry, item)
@@ -65,6 +68,14 @@ return {
           end
           return item
         end,
+      },
+      sources = {
+        { name = "copilot" },
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "buffer" },
+        { name = "path" },
+        { name = "emoji" },
       },
       completion = {
         completeopt = "menu,menuone,select",
@@ -144,14 +155,6 @@ return {
           end
         end, { "i", "s" }),
       }),
-      sources = cmp.config.sources({
-        { name = "copilot", group_index = 1 },
-        { name = "nvim_lsp", group_index = 3 },
-        { name = "luasnip", group_index = 2 },
-        { name = "buffer", group_index = 4 },
-        { name = "path", group_index = 5 },
-        { name = "emoji", group_index = 6 },
-      }),
       -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
       cmp.setup.cmdline({ "/", "?" }, {
         mapping = cmp.mapping.preset.cmdline(),
@@ -168,6 +171,11 @@ return {
         }, {
           { name = "cmdline" },
         }),
+      }),
+      cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+        sources = {
+          { name = "dap" },
+        },
       }),
     })
   end,
