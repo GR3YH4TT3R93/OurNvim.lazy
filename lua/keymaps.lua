@@ -97,7 +97,11 @@ vim.keymap.set("n", "<leader>fi", builtin.lsp_implementations, opts)
 vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, opts)
 vim.keymap.set("n", "<leader>fy", extensions.neoclip.default, opts)
 vim.keymap.set("n", "<leader>fu", extensions.undo.undo, opts)
+vim.keymap.set("n", "<leader>fl", ":Telescope software-licenses find<CR>", opts)
 vim.keymap.set("n", "<leader>ft", ":TodoTelescope<CR>", opts)
+vim.keymap.set("n", "<leader><leader>", function()
+  extensions.smart_open.smart_open({ filename_first = false })
+end, opts)
 --}}}
 
 -- Nvim Space Folding {{{
