@@ -6,6 +6,7 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     "JoosepAlviste/nvim-ts-context-commentstring",
     "numToStr/Comment.nvim",
+    "RRethy/nvim-treesitter-endwise",
   },
   config = function()
     local configs = require("nvim-treesitter.configs")
@@ -45,6 +46,7 @@ return {
       ignore_install = {},
       highlight = { enable = true },
       indent = { enable = true },
+      endwise = { enable = true },
       modules = {},
       incremental_selection = {
         enable = true,
