@@ -33,6 +33,7 @@ vim.keymap.set("v", "<A-l>", ":MoveHBlock(1)<CR>", opts)
 
 -- Neo Tree Commands {{{
 vim.keymap.set("n", "<C-n>", ":Neotree toggle<cr>", opts)
+vim.keymap.set("n", "<C-n>s", ":Neotree git_status<cr>", opts)
 -- }}}
 
 -- LazyGit Commands {{{
