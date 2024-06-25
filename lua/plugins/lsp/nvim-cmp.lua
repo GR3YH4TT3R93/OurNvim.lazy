@@ -45,8 +45,6 @@ return {
       Copilot = "",
     }
 
-    luasnip.config.setup({})
-
     require("luasnip.loaders.from_vscode").lazy_load()
 
     local has_words_before = function()
@@ -60,7 +58,7 @@ return {
         return vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt" or require("cmp_dap").is_dap_buffer()
       end,
       formatting = {
-        -- fields = { "kind", "abbr", "menu" }, -- order of columns,
+        fields = { "kind", "abbr", "menu" }, -- order of columns,
         format = function(entry, item)
           item.menu = item.kind
           item = require("cmp-tailwind-colors").format(entry, item)
