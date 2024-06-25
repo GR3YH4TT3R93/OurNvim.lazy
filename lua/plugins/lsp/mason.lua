@@ -133,16 +133,41 @@ return {
         -- end
         ["volar"] = function()
           require("lspconfig").volar.setup({
-            filetypes = { "vue", "javascript", "typescript", "javascriptreact", "typescriptreact", "json" },
+            -- NOTE: Uncomment to enable volar in file types other than vue.
+            -- (Similar to Takeover Mode)
+
+            -- filetypes = { "vue", "javascript", "typescript", "javascriptreact", "typescriptreact", "json" },
             init_options = {
               vue = {
                 hybridMode = false,
               },
-              typescript = {
-                tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
-              },
+              -- NOTE: This might not be needed. Uncomment if you encounter issues.
+
+              -- typescript = {
+              --   tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
+              -- },
             },
             capabilities = capabilities,
+          })
+        end,
+
+        ["tsserver"] = function()
+          local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
+          local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
+
+          require("lspconfig").tsserver.setup({
+            -- NOTE: To enable hybridMode, change HybrideMode to true above and uncomment the following filetypes block.
+
+            -- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+            init_options = {
+              plugins = {
+                {
+                  name = "@vue/typescript-plugin",
+                  location = volar_path,
+                  languages = { "vue" },
+                },
+              },
+            },
           })
         end,
       },

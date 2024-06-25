@@ -72,7 +72,26 @@ return {
       },
       sources = {
         { name = "copilot" },
-        { name = "nvim_lsp" },
+        {
+          name = "nvim_lsp",
+          entry_filter = function(entry, ctx)
+            -- Check if the buffer type is 'vue'
+            if ctx.filetype ~= "vue" then
+              return true
+            end
+
+            local cursor_before_line = ctx.cursor_before_line
+            -- For events
+            if cursor_before_line:sub(-1) == "@" then
+              return entry.completion_item.label:match("^@")
+              -- For props also exclude events with `:on-` prefix
+            elseif cursor_before_line:sub(-1) == ":" then
+              return entry.completion_item.label:match("^:") and not entry.completion_item.label:match("^:on-")
+            else
+              return true
+            end
+          end,
+        },
         { name = "luasnip" },
         { name = "buffer" },
         { name = "path" },
