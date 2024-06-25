@@ -14,7 +14,6 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     "folke/lazydev.nvim",
   },
-  event = "VeryLazy",
   config = function()
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
     ---@type table<string, boolean>
