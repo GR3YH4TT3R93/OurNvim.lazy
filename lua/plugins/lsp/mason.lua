@@ -65,7 +65,6 @@ return {
         -- "revive",
         -- "shfmt",
         -- "prettierd",
-        -- "tsserver",
         -- "vint",
       },
       auto_update = true, -- Default: false
