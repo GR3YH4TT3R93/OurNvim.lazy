@@ -12,6 +12,7 @@ return {
     "nvimtools/none-ls-extras.nvim",
     "gbprod/none-ls-luacheck.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
+    "zapling/mason-lock.nvim",
     "folke/lazydev.nvim",
   },
   config = function()
@@ -70,6 +71,10 @@ return {
       run_on_start = true, -- Default: true
       start_delay = 2000, -- 2 second delay ( Default: 0 )
       debounce_hours = 1, -- at least 1 hour between attempts to install/update
+    })
+
+    require("mason-lock").setup({
+      lockfile_path = vim.fn.stdpath("config") .. "/mason-lock.json", -- (default)
     })
     require("mason-null-ls").setup({
       automatic_installation = { exclude = { "stylua", "gitsigns" } },
@@ -135,6 +140,15 @@ return {
             -- (Similar to Takeover Mode)
 
             -- filetypes = { "vue", "javascript", "typescript", "javascriptreact", "typescriptreact", "json" },
+
+            -- NOTE: Uncomment to restrict Volar to only Vue/Nuxt projects. This will enable Volar to work alongside other language servers (tsserver).
+
+            -- root_dir = require("lspconfig").util.root_pattern(
+            --   "vue.config.js",
+            --   "vue.config.ts",
+            --   "nuxt.config.js",
+            --   "nuxt.config.ts"
+            -- ),
             init_options = {
               vue = {
                 hybridMode = false,

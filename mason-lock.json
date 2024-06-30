@@ -1,0 +1,23 @@
+{
+  "bash-language-server": "5.4.0",
+  "commitlint": "19.3.0",
+  "eslint_d": "13.1.2",
+  "gofumpt": "v0.6.0",
+  "golangci-lint": "v1.59.1",
+  "golines": "v0.12.2",
+  "gomodifytags": "v1.16.0",
+  "gopls": "v0.16.0",
+  "gotests": "v1.6.0",
+  "gotestsum": "v1.12.0",
+  "impl": "v1.4.0",
+  "json-lsp": "4.10.0",
+  "json-to-struct": "v0.0.0-20230613234638-1f65fffbfdbb",
+  "luacheck": "1.1.0",
+  "nilaway": "v0.0.0-20240524204351-885be9df8ef4",
+  "node-debug2-adapter": "v1.43.0",
+  "shellcheck": "v0.10.0",
+  "staticcheck": "v0.4.7",
+  "tailwindcss-language-server": "0.0.18",
+  "typescript-language-server": "4.3.3",
+  "vue-language-server": "2.0.22"
+}
