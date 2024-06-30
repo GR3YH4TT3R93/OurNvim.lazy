@@ -10,6 +10,8 @@ return {
       defaults = {
         prompt_prefix = " ",
         selection_caret = "󱞩 ",
+        path_display = { "filename_first" },
+        layout_strategy = "vertical",
       },
       extensions = {
         fzf = {
@@ -25,7 +27,9 @@ return {
         undo = {},
         smart_open = {
           match_algorithm = "fzf",
-          filename_first = false,
+        },
+        frecency = {
+          prompt_title = "Frecency",
         },
       },
     })
