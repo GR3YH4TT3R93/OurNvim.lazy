@@ -60,11 +60,18 @@ return {
       formatting = {
         fields = { "kind", "abbr", "menu" }, -- order of columns,
         format = function(entry, item)
-          item.menu = item.kind
-          item = require("cmp-tailwind-colors").format(entry, item)
-          if kind_icons[item.kind] then
-            item.kind = kind_icons[item.kind] .. " "
+          ---@type function<string, table, nil>
+          item = require("nvim-highlight-colors").format(entry, item)
+          -- the item.abbr returns the user's virtual object eg. the square when it's Color entry
+          if item.abbr == "" then
+            -- I have kind_icons table looks like kind_icons = { Text = "Tt (this is icon)", ...more icons }
+            item.kind = string.format("%s", kind_icons[item.menu])
+          else
+            item.kind = item.abbr
           end
+          item.abbr = item.word
+          item.kind_hl_group = item.abbr_hl_group or nil
+          item.abbr_hl_group = nil
           return item
         end,
       },
@@ -78,6 +85,7 @@ return {
               return true
             end
 
+            ---@type string
             local cursor_before_line = ctx.cursor_before_line
             -- For events
             if cursor_before_line:sub(-1) == "@" then
@@ -109,7 +117,9 @@ return {
         end,
       },
       window = {
+        ---@type function
         completion = cmp.config.window.bordered(),
+        ---@type function
         documentation = cmp.config.window.bordered(),
       },
       mapping = cmp.mapping.preset.insert({
