@@ -2,7 +2,8 @@
 local opts = { noremap = true, silent = true }
 local builtin = require("telescope.builtin")
 local extensions = require("telescope").extensions
-local _extensions = require("telescope._extensions")
+local bufnr = vim.api.nvim_get_current_buf()
+local chat = require("CopilotChat")
 --}}}
 
 -- Scroll with Mouse {{{
@@ -119,10 +120,10 @@ end, opts)
 vim.keymap.set("n", "<leader>fdi", function()
   builtin.diagnostics()
 end, opts)
-vim.keymap.set("n", "<leader>fqf", function()
+vim.keymap.set("n", "<leader>fq", function()
   builtin.quickfix()
 end, opts)
-vim.keymap.set("n", "<leader>fqfh", function()
+vim.keymap.set("n", "<leader>fqh", function()
   builtin.quickfixhistory()
 end, opts)
 vim.keymap.set("n", "<leader>fi", function()
@@ -177,7 +178,6 @@ vim.keymap.set("i", "<C-l>", "<esc> :bnext<cr>", opts)
 
 -- Run Eslint with Leader lf {{{
 vim.keymap.set("n", "<leader>lf", function()
-  local bufnr = vim.api.nvim_get_current_buf()
   vim.lsp.buf.format({
     filter = function(client)
       return client.name == "null-ls"
@@ -259,23 +259,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- Diagnostics with Trouble
     -- LSP bindings
     vim.keymap.set("n", "gd", function()
-      require("trouble").toggle("lsp_definitions")
+      require("goto-preview").goto_preview_definition()
     end, op)
 
     vim.keymap.set("n", "gD", function()
-      require("trouble").toggle("lsp_declarations")
+      require("goto-preview").goto_preview_declaration()
     end, op)
 
     vim.keymap.set("n", "gi", function()
-      require("trouble").toggle("lsp_implementations")
+      require("goto-preview").goto_preview_implementation()
     end, op)
 
     vim.keymap.set("n", "gt", function()
-      require("trouble").toggle("lsp_type_definitions")
+      require("goto-preview").goto_preview_type_definition()
     end, op)
 
     vim.keymap.set("n", "gr", function()
-      require("trouble").toggle("lsp_references")
+      require("goto-preview").goto_preview_references()
     end, op)
 
     vim.keymap.set("n", "[d", function()
@@ -300,9 +300,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "K", function()
       vim.lsp.buf.hover()
     end, op)
-    -- vim.keymap.set("n", "gd", function()
-    --   vim.lsp.buf.definition()
-    -- end, op)
     vim.keymap.set("n", "gs", function()
       vim.lsp.buf.signature_help()
     end, op)
@@ -354,3 +351,13 @@ end, opts)
 -- VimBeGood Commands {{{
 vim.keymap.set("n", "<leader>bg", ":VimBeGood<CR>", opts)
 --}}}
+
+-- Copilot Chat Commands {{{
+vim.keymap.set("n", "<leader>cc", function()
+  chat.toggle({
+    window = {
+      layout = "float",
+      title = "Copilot Chat",
+    },
+  })
+end, opts)
