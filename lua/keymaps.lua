@@ -3,7 +3,6 @@ local opts = { noremap = true, silent = true }
 local builtin = require("telescope.builtin")
 local extensions = require("telescope").extensions
 local bufnr = vim.api.nvim_get_current_buf()
-local chat = require("CopilotChat")
 --}}}
 
 -- Scroll with Mouse {{{
