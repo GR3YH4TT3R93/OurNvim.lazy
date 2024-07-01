@@ -19,5 +19,5 @@
   "staticcheck": "v0.4.7",
   "tailwindcss-language-server": "0.0.18",
   "typescript-language-server": "4.3.3",
-  "vue-language-server": "2.0.22"
+  "vue-language-server": "2.0.24"
 }
