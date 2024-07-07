@@ -12,8 +12,8 @@ return {
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         disabled_filetypes = {
-          statusline = { "neo-tree", "trouble", "toggleterm" },
-          winbar = { "neo-tree", "trouble", "toggleterm" },
+          statusline = { "neo-tree", "trouble", "toggleterm", "dbui" },
+          winbar = { "neo-tree", "trouble", "toggleterm", "dbui" },
         },
         filetype_names = {
           dashboard = "Dashboard",
