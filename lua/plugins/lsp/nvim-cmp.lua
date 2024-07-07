@@ -10,6 +10,9 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-emoji",
+    "hrsh7th/cmp-nvim-lsp-signature-help",
+    "hrsh7th/cmp-nvim-lsp-document-symbol",
+    "petertriho/cmp-git",
     "rafamadriz/friendly-snippets",
     "rcarriga/cmp-dap",
   },
@@ -58,6 +61,7 @@ return {
         return vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt" or require("cmp_dap").is_dap_buffer()
       end,
       formatting = {
+        expandable_indicator = true,
         fields = { "kind", "abbr", "menu" }, -- order of columns,
         format = function(entry, item)
           item.menu = item.kind
@@ -69,7 +73,9 @@ return {
         end,
       },
       sources = {
+        { name = "lazydev" },
         { name = "copilot" },
+        { name = "nvim_lsp_signature_help" },
         {
           name = "nvim_lsp",
           entry_filter = function(entry, ctx)
@@ -92,6 +98,7 @@ return {
           end,
         },
         { name = "luasnip" },
+        { name = "git" },
         { name = "buffer" },
         { name = "path" },
         { name = "emoji" },
@@ -110,9 +117,9 @@ return {
         end,
       },
       window = {
-        ---@type function
+        ---@type function | table
         completion = cmp.config.window.bordered(),
-        ---@type function
+        ---@type function | table
         documentation = cmp.config.window.bordered(),
       },
       mapping = cmp.mapping.preset.insert({
@@ -182,6 +189,7 @@ return {
       cmp.setup.cmdline({ "/", "?" }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
+          { name = "nvim_lsp_document_symbol" },
           { name = "buffer" },
         },
       }),
