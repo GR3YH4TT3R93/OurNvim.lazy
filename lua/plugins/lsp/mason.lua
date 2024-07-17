@@ -48,10 +48,10 @@ return {
         "delve",
 
         -- Lua
-        "luacheck",
-        "stylua",
-        "lua_ls",
-        "selene",
+        -- "luacheck",
+        -- "stylua",
+        -- "lua_ls",
+        -- "selene",
 
         -- JavaScript/TypeScript
         "tsserver",
@@ -90,13 +90,6 @@ return {
         require("null-ls").builtins.formatting.stylua,
         require("null-ls").builtins.code_actions.gitsigns,
         require("null-ls").builtins.diagnostics.zsh,
-        -- require("null-ls").builtins.diagnostics.selene,
-        -- require("null-ls").builtins.formatting.gofumpt,
-        -- require("null-ls").builtins.formatting.golines,
-        -- require("null-ls").builtins.code_actions.gomodifytags,
-        -- require("null-ls").builtins.code_actions.impl,
-        -- require("null-ls").builtins.diagnostics.golangci_lint,
-        -- require("null-ls").builtins.diagnostics.staticcheck,
         require("none-ls.diagnostics.eslint_d"),
         require("none-ls.formatting.eslint_d").with({ timeout = 5000 }),
         require("none-ls.code_actions.eslint_d"),
@@ -247,7 +240,7 @@ return {
               -- "~/.local/share/nvim/lazy",
             },
           },
-          hint = {
+          inlayHints = {
             enable = true,
           },
         })
