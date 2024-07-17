@@ -11,6 +11,8 @@ require("lazy").setup({
     { import = "plugins.games" },
     { import = "plugins.git" },
     { import = "plugins.lsp" },
+    { import = "plugins.lsp.rust" },
+    { import = "plugins.lsp.go" },
     { import = "plugins.telescope" },
     { import = "plugins.theme" },
   },
