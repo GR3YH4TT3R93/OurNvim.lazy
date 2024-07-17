@@ -20,9 +20,9 @@ return {
           toggleterm = "ToggleTerm",
           trouble = "Trouble",
         },
-        ignore_focus = {},
+        ignore_focus = { "Neo-tree Filesystem", "trouble", "toggleterm", "dbui" },
         always_divide_middle = true,
-        globalstatus = false,
+        globalstatus = true,
         refresh = {
           statusline = 100,
           tabline = 100,
@@ -42,7 +42,6 @@ return {
           },
           {
             "copilot",
-            -- Default values
             symbols = {
               status = {
                 icons = {
@@ -92,7 +91,7 @@ return {
         lualine_a = { { "buffers", hide_filename_extension = true, mode = 2 } },
         lualine_x = {},
         lualine_y = {},
-        lualine_z = { "tabs" },
+        lualine_z = { { "tabs", symbols = { modified = "" } } },
       },
       extensions = { "lazy", "neo-tree", "toggleterm", "trouble", "nvim-dap-ui", "fzf" },
     })
