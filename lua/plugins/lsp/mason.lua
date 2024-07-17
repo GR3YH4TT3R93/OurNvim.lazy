@@ -1,17 +1,17 @@
 return {
-  "williamboman/mason.nvim",
+  "neovim/nvim-lspconfig",
+  event = "VeryLazy",
   dependencies = {
-    "neovim/nvim-lspconfig",
+    "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "jay-babu/mason-null-ls.nvim",
-    "jay-babu/mason-nvim-dap.nvim",
+    { "GR3YH4TT3R93/mason-nvim-dap.nvim", branch = "feat/vue-support" },
     "rcarriga/nvim-dap-ui",
     "mfussenegger/nvim-dap",
     "nvim-neotest/nvim-nio",
     "nvimtools/none-ls.nvim",
     "nvimtools/none-ls-extras.nvim",
-    "gbprod/none-ls-luacheck.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    { "WhoIsSethDaniel/mason-tool-installer.nvim", lazy = false },
     "zapling/mason-lock.nvim",
     "folke/lazydev.nvim",
   },
@@ -45,6 +45,7 @@ return {
         "impl",
         "json-to-struct",
         "staticcheck",
+        "delve",
 
         -- Lua
         "luacheck",
@@ -53,6 +54,7 @@ return {
         "selene",
 
         -- JavaScript/TypeScript
+        "tsserver",
         "eslint_d",
         "volar",
         "tailwindcss",
@@ -69,7 +71,7 @@ return {
       },
       auto_update = true, -- Default: false
       run_on_start = true, -- Default: true
-      start_delay = 2000, -- 2 second delay ( Default: 0 )
+      start_delay = 1000, -- 2 second delay ( Default: 0 )
       debounce_hours = 1, -- at least 1 hour between attempts to install/update
     })
 
@@ -77,6 +79,7 @@ return {
       lockfile_path = vim.fn.stdpath("config") .. "/mason-lock.json", -- (default)
     })
     require("mason-null-ls").setup({
+      ensure_installed = {},
       automatic_installation = { exclude = { "stylua", "gitsigns" } },
       handlers = {},
     })
@@ -87,10 +90,17 @@ return {
         require("null-ls").builtins.formatting.stylua,
         require("null-ls").builtins.code_actions.gitsigns,
         require("null-ls").builtins.diagnostics.zsh,
+        -- require("null-ls").builtins.diagnostics.selene,
+        -- require("null-ls").builtins.formatting.gofumpt,
+        -- require("null-ls").builtins.formatting.golines,
+        -- require("null-ls").builtins.code_actions.gomodifytags,
+        -- require("null-ls").builtins.code_actions.impl,
+        -- require("null-ls").builtins.diagnostics.golangci_lint,
+        -- require("null-ls").builtins.diagnostics.staticcheck,
         require("none-ls.diagnostics.eslint_d"),
-        require("none-ls.formatting.eslint_d"),
+        require("none-ls.formatting.eslint_d").with({ timeout = 5000 }),
         require("none-ls.code_actions.eslint_d"),
-        require("none-ls-luacheck.diagnostics.luacheck"),
+        -- require("none-ls-luacheck.diagnostics.luacheck"),
       },
       -- Format on save using null-ls instead of lsp server.
       on_attach = function(current_client, bufnr)
@@ -111,11 +121,6 @@ return {
           })
         end
       end,
-    })
-
-    -- Lazydev setup with nvim-dap-ui
-    require("lazydev").setup({
-      library = { "nvim-dap-ui" },
     })
 
     require("mason-lspconfig").setup({
@@ -158,6 +163,14 @@ return {
               -- typescript = {
               --   tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
               -- },
+              -- inlayHints = {
+              --   enabled = true,
+              --   -- Only show inlay hints for the following types
+              --   only = { "parameter", "type", "enumMember", "function" },
+              -- },
+            },
+            inlayHints = {
+              enabled = true,
             },
             capabilities = capabilities,
           })
@@ -180,12 +193,18 @@ return {
                 },
               },
             },
+            capabilities = capabilities,
+            inlayHints = {
+              enabled = true,
+            },
           })
         end,
       },
     })
 
     require("mason-nvim-dap").setup({
+      ensure_installed = {},
+      automatic_installation = true,
       handlers = {
         function(config)
           -- all sources with no handler get passed here
@@ -194,7 +213,7 @@ return {
           require("mason-nvim-dap").default_setup(config)
         end,
       },
-      capabilities = capabilities,
+      -- capabilities = capabilities,
     })
 
     require("dapui").setup()

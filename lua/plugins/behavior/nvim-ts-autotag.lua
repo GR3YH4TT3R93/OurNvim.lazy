@@ -1,6 +1,6 @@
 return {
   "windwp/nvim-ts-autotag",
-  event = "InsertEnter",
+  -- event = "InsertEnter",
   ft = {
     "javascript",
     "javascriptreact",

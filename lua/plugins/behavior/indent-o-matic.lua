@@ -1,5 +1,6 @@
 return {
   "Darazaki/indent-o-matic",
+  lazy = false,
   -- event = "VeryLazy",
   config = function()
     require("indent-o-matic").setup({

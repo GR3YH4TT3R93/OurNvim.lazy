@@ -1,7 +1,6 @@
 return {
   "brenoprata10/nvim-highlight-colors",
-  lazy = true,
-  event = "BufReadPre",
+  event = "BufEnter",
   config = function()
     require("nvim-highlight-colors").setup({
       render = "foreground",

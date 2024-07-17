@@ -14,6 +14,9 @@ require("lazy").setup({
     { import = "plugins.telescope" },
     { import = "plugins.theme" },
   },
+  defaults = {
+    lazy = true,
+  },
   change_detection = { notify = false },
   checker = { enabled = true, notify = false },
   install = {

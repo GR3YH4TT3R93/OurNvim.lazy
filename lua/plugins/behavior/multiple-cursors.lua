@@ -1,7 +1,7 @@
 return {
   "brenton-leighton/multiple-cursors.nvim",
   version = "*", -- Use the latest tagged version
-  event = "VeryLazy",
+  -- event = "VeryLazy",
   opts = {
     pre_hook = function()
       require("nvim-autopairs").disable()

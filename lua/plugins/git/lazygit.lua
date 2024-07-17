@@ -1,6 +1,5 @@
 return {
   "kdheepak/lazygit.nvim",
-  Lazy = true,
   command = "LazyGit",
   -- optional for floating window border decoration
   dependencies = {

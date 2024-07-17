@@ -1,6 +1,7 @@
 return {
   "nvimdev/dashboard-nvim",
-  event = "VimEnter",
+  event = "BufEnter",
+  priority = 1000,
   config = function()
     require("dashboard").setup({
       theme = "hyper", --  theme is doom and hyper default is hyper
