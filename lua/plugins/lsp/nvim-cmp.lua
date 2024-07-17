@@ -1,5 +1,7 @@
 return {
   "hrsh7th/nvim-cmp",
+  -- commit = "7e348da6e5085ac447144a2ef4b637220ba27209",
+  --
   lazy = true,
   event = "InsertEnter",
   dependencies = {
@@ -10,13 +12,19 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-emoji",
+    "hrsh7th/cmp-omni",
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "hrsh7th/cmp-nvim-lsp-document-symbol",
     "petertriho/cmp-git",
     "rafamadriz/friendly-snippets",
     "rcarriga/cmp-dap",
+    "SergioRibera/cmp-dotenv",
+    "Snikimonkd/cmp-go-pkgs",
+    "David-Kunz/cmp-npm",
+    "davidsierradz/cmp-conventionalcommits",
   },
   config = function()
+    require("cmp-npm").setup({})
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     local kind_icons = {
@@ -75,7 +83,11 @@ return {
       sources = {
         { name = "lazydev" },
         { name = "copilot" },
+        { name = "dotenv" },
+        { name = "go_pkgs" },
+        { name = "npm", keyword_length = 4 },
         { name = "nvim_lsp_signature_help" },
+        { name = "conventionalcommits" },
         {
           name = "nvim_lsp",
           entry_filter = function(entry, ctx)
@@ -99,6 +111,12 @@ return {
         },
         { name = "luasnip" },
         { name = "git" },
+        {
+          name = "omni",
+          option = {
+            disable_omnifuncs = { "v:lua.vim.lsp.omnifunc" },
+          },
+        },
         { name = "buffer" },
         { name = "path" },
         { name = "emoji" },
