@@ -37,7 +37,7 @@ return {
         "git_config",
         "regex",
         "diff",
-        "markdown",
+        -- "markdown",
         "markdown_inline",
         "toml",
         "yaml",

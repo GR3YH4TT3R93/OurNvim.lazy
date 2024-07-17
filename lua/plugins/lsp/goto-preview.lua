@@ -1,8 +1,6 @@
 return {
   "rmagatti/goto-preview",
-  event = "BufEnter",
-  config = function()
-    require("goto-preview").setup({
+  opts = {
       -- focus_on_open = false,
       -- dismiss_on_move = true,
       border = { "↖", "─", "╮", "│", "╯", "─", "╰", "│" },
@@ -24,6 +22,5 @@ return {
         vim.keymap.del("n", "gt")
         vim.keymap.del("n", "q")
       end,
-    })
-  end, -- necessary as per https://github.com/rmagatti/goto-preview/issues/88
+    }
 }
