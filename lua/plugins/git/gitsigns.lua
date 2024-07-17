@@ -14,7 +14,14 @@ return {
         topdelete = { text = "‾" },
         changedelete = { text = "≃" },
       },
-      numhl = false,
+      -- Gitsigns in dotfiles!
+      worktrees = {
+        {
+          toplevel = vim.env.HOME,
+          gitdir = vim.env.HOME .. "/GitHub/dotfiles", -- NOTE: This is a bare .git directory
+        },
+      },
+      numhl = true,
       linehl = false,
       -- word_diff = true,
       current_line_blame = true,
