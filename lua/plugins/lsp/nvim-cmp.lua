@@ -25,6 +25,7 @@ return {
   },
   config = function()
     require("cmp-npm").setup({})
+    require("cmp_git").setup()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     local kind_icons = {
@@ -83,7 +84,6 @@ return {
       sources = {
         { name = "lazydev" },
         { name = "copilot" },
-        { name = "dotenv" },
         { name = "go_pkgs" },
         { name = "npm", keyword_length = 4 },
         { name = "nvim_lsp_signature_help" },
@@ -225,6 +225,19 @@ return {
         sources = {
           { name = "dap" },
         },
+      }),
+      cmp.setup.filetype({ "gitcommit" }, {
+        sources = cmp.config.sources({
+          { name = "git" },
+          { name = "conventionalcommits" },
+          { name = "buffer" },
+        }),
+      }),
+      cmp.setup.filetype("sh", {
+        sources = cmp.config.sources({
+          { name = "dotenv" },
+          { name = "cmdline" },
+        }),
       }),
     })
   end,
