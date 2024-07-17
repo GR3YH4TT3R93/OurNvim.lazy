@@ -24,6 +24,7 @@ return {
         ["ui-select"] = {
           require("telescope.themes").get_dropdown({}),
         },
+        ["licenses-nvim"] = { default_action = "insert" },
         undo = {},
         smart_open = {
           match_algorithm = "fzf",
