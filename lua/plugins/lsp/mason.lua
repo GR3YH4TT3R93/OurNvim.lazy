@@ -123,6 +123,10 @@ return {
       end,
     })
 
+    require("lazydev").setup({
+      library = vim.api.nvim_get_runtime_file("", true),
+    })
+
     require("mason-lspconfig").setup({
       automatic_installation = true,
       handlers = {
