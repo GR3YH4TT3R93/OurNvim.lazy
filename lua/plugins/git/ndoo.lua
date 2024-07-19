@@ -1,6 +1,5 @@
 return {
-  "GR3YH4TT3R93/ndoo.nvim",
-  branch = "fix/conditional-bitbucket-config",
+  "mistweaverco/ndoo.nvim",
   dependencies = {
     "nvim-telescope/telescope.nvim",
   },
