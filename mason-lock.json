@@ -15,11 +15,14 @@
   "impl": "v1.4.0",
   "json-lsp": "4.10.0",
   "json-to-struct": "v0.0.0-20230613234638-1f65fffbfdbb",
+  "lua-language-server": "3.9.3",
+  "marksman": "2023-12-09",
   "nilaway": "v0.0.0-20240524204351-885be9df8ef4",
   "node-debug2-adapter": "v1.43.0",
+  "rust-analyzer": "2024-07-22",
   "shellcheck": "v0.10.0",
   "staticcheck": "v0.4.7",
   "tailwindcss-language-server": "0.0.21",
   "typescript-language-server": "4.3.3",
-  "vue-language-server": "2.0.26"
+  "vue-language-server": "2.0.29"
 }
