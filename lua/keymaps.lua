@@ -22,9 +22,10 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
   -- map("n", "lh", ":MoveHChar(-1)<CR>", opts)
   map("n", "lj", ":MoveLine(1)<CR>", opts)
   map("n", "lk", ":MoveLine(-1)<CR>", opts)
-  map("n", "ll", ":MoveHChar(1)<CR>", { nowait = false })
+  map("n", "L", ":MoveHChar(1)<CR>", opts)
+  map("n", "H", ":MoveHChar(-1)<CR>", opts)
   map("n", "<leader>wf", ":MoveWord(1)<CR>", opts)
-  map("n", "<leader>wb", ":moveWord(-1)<CR>", opts)
+  map("n", "<leader>wb", ":MoveWord(-1)<CR>", opts)
   map("n", "<Shift>|", function()
     require("multiple-cursors").align()
   end, opts)
@@ -65,10 +66,6 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
   map({ "n", "t" }, "<A-=>", "<C-w>=", opts)
   map({ "n", "t" }, "<A-->", "<C-w>-", opts)
   map({ "n", "t" }, "<A-+>", "<C-w>+", opts)
-  map({ "n", "t" }, "<A-\\<>", "<C-w><", opts)
-  map({ "n", "t" }, "<A-\\>>", "<C-w>>", opts)
-  map({ "n", "t" }, "<A-\\_>", "<C-w>_", opts)
-  map({ "n", "t" }, "<A-\\|>", "<C-w>|", opts)
   map({ "n", "t" }, "<A-p>", [[<C-\><C-n><C-w>]], opts)
   map({ "t" }, "<esc><esc>", [[<C-\><C-n>]], opts)
   -- }}}
@@ -77,9 +74,6 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
   map("n", "<C-s>", ":w | e | TSBufEnable highlight<cr>", opts)
   map("x", "<C-s>", "<esc> :w | e | TSBufEnable highlight<cr>", opts)
   map("i", "<C-s>", "<esc> :w | e | TSBufEnable highlight<cr>i", opts)
-  map("n", "<C-Shift>s", ":wa | e | TSEnable highlight<cr>", opts)
-  map("x", "<C-Shift>s", "<esc>:wa | e | TSEnable highlight<cr>", opts)
-  map("i", "<C-Shift>s", "<esc>:wa | e | TSEnable highlight<cr>i", opts)
   map("n", "<C-q>", ":q!<cr>", opts)
   map("x", "<C-q>", "<esc> :q!<cr>", opts)
   map("i", "<C-q>", "<esc> :q!<cr>", opts)
@@ -237,7 +231,7 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
     callback = function(e)
       vim.schedule(function()
         if #e.data == 0 then
-          vim.notify("All LSP servers are up-to-date!", "info", { title = "mason-tool-installer" })
+          vim.notify("All LSP servers are up-to-date!", vim.log.levels.INFO, { title = "mason-tool-installer" })
         end
       end)
     end,
@@ -319,6 +313,10 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
         require("goto-preview").goto_preview_implementation({})
       end, op)
 
+      map("n", "gI", function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+      end, op)
+
       map("n", "gt", function()
         require("goto-preview").goto_preview_type_definition({})
       end, op)
@@ -330,7 +328,7 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
       map("n", "[d", function()
         if vim.tbl_isempty(vim.diagnostic.get(0)) then
           require("trouble").close("diagnostics")
-          vim.notify("No diagnostic errors found", "info", { title = "Trouble" })
+          vim.notify("No diagnostic errors found", vim.log.levels.INFO, { title = "Trouble" })
         else
           vim.diagnostic.goto_prev()
           require("trouble").prev({ mode = "diagnostics" })
@@ -340,7 +338,7 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
       map("n", "]d", function()
         if vim.tbl_isempty(vim.diagnostic.get(0)) then
           require("trouble").close("diagnostics")
-          vim.notify("No diagnostic errors found", "info", { title = "Trouble" })
+          vim.notify("No diagnostic errors found", vim.log.levels.INFO, { title = "Trouble" })
         else
           vim.diagnostic.goto_next()
           require("trouble").next({ mode = "diagnostics" })
@@ -360,7 +358,7 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
         vim.lsp.buf.format({ async = true })
       end, op)
       map({ "n", "x" }, "<leader>ca", function()
-        vim.lsp.buf.code_action()
+        require("fastaction").code_action()
       end, op)
     end,
   })
@@ -426,10 +424,10 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
   --   require("fastaction").code_action()
   -- end, opts)
   aucmd("FileType", {
-    pattern = { "sh", "zsh", "bash" },
+    pattern = "zsh",
     callback = function()
       vim.lsp.start({
-        name = "bash-language-server",
+        name = "bashls",
         cmd = { "bash-language-server", "start" },
       })
     end,
@@ -441,6 +439,7 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
     pattern = "LspProgressStatusUpdated",
     callback = require("lualine").refresh,
   })
+
   -- Ndoo Commands {{{
   map({ "n", "x" }, "<leader>ro", function()
     require("ndoo").open({ v = true })
@@ -477,4 +476,5 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
   map("n", "<leader>im", function()
     require("telescope").extensions.goimpl.goimpl()
   end)
+  --}}}
 end
