@@ -1,24 +1,22 @@
 return {
-  "neovim/nvim-lspconfig",
+  "WhoIsSethDaniel/mason-tool-installer.nvim",
   event = "VeryLazy",
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
     "jay-babu/mason-null-ls.nvim",
-    { "GR3YH4TT3R93/mason-nvim-dap.nvim", branch = "feat/vue-support" },
+    "jay-babu/mason-nvim-dap.nvim",
     "rcarriga/nvim-dap-ui",
     "mfussenegger/nvim-dap",
     "nvim-neotest/nvim-nio",
     "nvimtools/none-ls.nvim",
     "nvimtools/none-ls-extras.nvim",
-    { "WhoIsSethDaniel/mason-tool-installer.nvim", lazy = false },
     "zapling/mason-lock.nvim",
     "folke/lazydev.nvim",
   },
   config = function()
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-    ---@type table<string, boolean>
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     require("mason").setup({})
     require("mason-tool-installer").setup({
@@ -31,7 +29,7 @@ return {
 
         -- Bash
         "bashls",
-        "shellcheck",
+        -- "shellcheck",
 
         -- Go
         "gopls",
@@ -46,6 +44,9 @@ return {
         "json-to-struct",
         "staticcheck",
         "delve",
+        "gospel",
+        "goimports",
+        "iferr",
 
         -- Lua
         -- "luacheck",
@@ -71,7 +72,7 @@ return {
       },
       auto_update = true, -- Default: false
       run_on_start = true, -- Default: true
-      start_delay = 1000, -- 2 second delay ( Default: 0 )
+      start_delay = 1000, -- 1 second delay ( Default: 0 )
       debounce_hours = 1, -- at least 1 hour between attempts to install/update
     })
 
@@ -90,22 +91,21 @@ return {
         require("null-ls").builtins.formatting.stylua,
         require("null-ls").builtins.code_actions.gitsigns,
         require("null-ls").builtins.diagnostics.zsh,
+        require("null-ls").builtins.diagnostics.selene,
+        -- Anythng not supported by none-ls.
         require("none-ls.diagnostics.eslint_d"),
         require("none-ls.formatting.eslint_d").with({ timeout = 5000 }),
         require("none-ls.code_actions.eslint_d"),
-        -- require("none-ls-luacheck.diagnostics.luacheck"),
       },
       -- Format on save using null-ls instead of lsp server.
       on_attach = function(current_client, bufnr)
         if current_client.supports_method("textDocument/formatting") then
-          vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
           vim.api.nvim_create_autocmd("BufWritePre", {
             group = augroup,
             buffer = bufnr,
             callback = function()
               vim.lsp.buf.format({
                 filter = function(client)
-                  --  only use null-ls for formatting instead of lsp server
                   return client.name == "null-ls"
                 end,
                 bufnr = bufnr,
@@ -121,21 +121,54 @@ return {
     })
 
     require("mason-lspconfig").setup({
-      automatic_installation = { exclude = { "lua_ls" } },
+      automatic_installation = true,
       handlers = {
         -- The first entry (without a key) will be the default handler
         -- and will be called for each installed server that doesn't have
         -- a dedicated handler.
         function(server_name) -- default handler (optional)
           require("lspconfig")[server_name].setup({
-            capabilities = capabilities,
+            -- capabilities = capabilities,
           })
         end,
         -- Next, you can provide a dedicated handler for specific servers.
         -- For example, a handler override for the `rust_analyzer`:
-        -- ["rust_analyzer"] = function ()
-        --     require("rust-tools").setup {}
-        -- end
+        ["rust_analyzer"] = function()
+          --     require("rust-tools").setup {}
+          require("lspconfig").rust_analyzer.setup({
+            settings = {
+              ["rust-analyzer"] = {
+                inlayHints = {
+                  chainingHints = true,
+                  typeHints = true,
+                  parameterHints = true,
+                  maxLength = 25,
+                  enumVariant = true,
+                  -- parameterHints = {
+                  --   mode = "PlainText",
+                  -- },
+                },
+              },
+            },
+          })
+        end,
+        ["gopls"] = function()
+          require("lspconfig").gopls.setup({
+            settings = {
+              gopls = {
+                hints = {
+                  rangeVariableTypes = true,
+                  parameterNames = true,
+                  constantValues = true,
+                  assignVariableTypes = true,
+                  compositeLiteralFields = true,
+                  compositeLiteralTypes = true,
+                  functionTypeParameters = true,
+                },
+              },
+            },
+          })
+        end,
         ["volar"] = function()
           require("lspconfig").volar.setup({
             -- NOTE: Uncomment to enable volar in file types other than vue.
@@ -160,16 +193,29 @@ return {
               -- typescript = {
               --   tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
               -- },
-              -- inlayHints = {
-              --   enabled = true,
-              --   -- Only show inlay hints for the following types
-              --   only = { "parameter", "type", "enumMember", "function" },
-              -- },
             },
-            inlayHints = {
-              enabled = true,
+            settings = {
+              typescript = {
+                inlayHints = {
+                  enumMemberValues = {
+                    enabled = true,
+                  },
+                  functionLikeReturnTypes = {
+                    enabled = true,
+                  },
+                  propertyDeclarationTypes = {
+                    enabled = true,
+                  },
+                  parameterTypes = {
+                    enabled = true,
+                    suppressWhenArgumentMatchesName = true,
+                  },
+                  variableTypes = {
+                    enabled = true,
+                  },
+                },
+              },
             },
-            capabilities = capabilities,
           })
         end,
 
@@ -190,9 +236,60 @@ return {
                 },
               },
             },
-            capabilities = capabilities,
-            inlayHints = {
-              enabled = true,
+            settings = {
+              typescript = {
+                inlayHints = {
+                  includeInlayParameterNameHints = "all",
+                  includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                  includeInlayFunctionParameterTypeHints = true,
+                  includeInlayVariableTypeHints = true,
+                  includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+                  includeInlayPropertyDeclarationTypeHints = true,
+                  includeInlayFunctionLikeReturnTypeHints = true,
+                  includeInlayEnumMemberValueHints = true,
+                },
+              },
+            },
+          })
+        end,
+        ["lua_ls"] = function()
+          require("lspconfig").lua_ls.setup({
+            on_init = function(client)
+              local path = client.workspace_folders[1].name
+              if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
+                return
+              end
+
+              client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+                runtime = {
+                  -- Tell the language server which version of Lua you're using
+                  -- (most likely LuaJIT in the case of Neovim)
+                  version = "LuaJIT",
+                },
+                -- Make the server aware of Neovim runtime files
+                workspace = {
+                  checkThirdParty = false,
+                  library = {
+                    -- vim.env.VIMRUNTIME,
+                    -- Depending on the usage, you might want to add additional paths here.
+                    -- "${3rd}/luv/library",
+                    -- "${3rd}/busted/library",
+                    -- "~/.local/share/nvim/lazy",
+                  },
+                },
+                hint = {
+                  enable = true,
+                  arrayIndex = "Auto",
+                  await = true,
+                  paramName = "All",
+                  paramType = true,
+                  semicolon = "SameLine",
+                  setType = true,
+                },
+              })
+            end,
+            settings = {
+              Lua = {},
             },
           })
         end,
@@ -210,45 +307,8 @@ return {
           require("mason-nvim-dap").default_setup(config)
         end,
       },
-      -- capabilities = capabilities,
     })
 
     require("dapui").setup()
-
-    -- Servers that are not installed by mason.
-    require("lspconfig").lua_ls.setup({
-      on_init = function(client)
-        local path = client.workspace_folders[1].name
-        if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
-          return
-        end
-
-        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-          runtime = {
-            -- Tell the language server which version of Lua you're using
-            -- (most likely LuaJIT in the case of Neovim)
-            version = "LuaJIT",
-          },
-          -- Make the server aware of Neovim runtime files
-          workspace = {
-            checkThirdParty = false,
-            library = {
-              -- vim.env.VIMRUNTIME,
-              -- Depending on the usage, you might want to add additional paths here.
-              -- "${3rd}/luv/library",
-              -- "${3rd}/busted/library",
-              -- "~/.local/share/nvim/lazy",
-            },
-          },
-          inlayHints = {
-            enable = true,
-          },
-        })
-      end,
-      settings = {
-        Lua = {},
-      },
-      capabilities = capabilities,
-    })
   end,
 }

@@ -26,6 +26,18 @@
      :LazySync
      ```
 
+3. **Create symbolic links for language servers**:
+   - **Lua Language Server**:
+     ```bash
+     mkdir -p ~/.local/share/mason/packages/lua-language-server
+     ln -s /data/data/com.termux/files/usr/bin/lua-language-server ~/.local/share/mason/packages/lua-language-server
+     ```
+   - **Rust Analyzer**:
+     ```bash
+     mkdir -p ~/.local/share/mason/packages/rust-analyzer
+     ln -s /data/data/com.termux/files/usr/bin/rust-analyzer ~/.local/share/mason/packages/rust-analyzer/rust-analyzer-aarch64-unknown-linux-gnu
+     ```
+
 ### 🐧 For Debian and Similar Distributions (Linux Branch)
 
 1. **Clone the repository**:
