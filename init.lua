@@ -19,6 +19,11 @@ require("lazy").setup({
   defaults = {
     lazy = true,
   },
+  dev = {
+    path = "~/GitHub",
+    pattern = { "GR3YH4TT3R93" },
+    fallback = true,
+  },
   change_detection = { notify = false },
   checker = { enabled = true, notify = false },
   install = {
