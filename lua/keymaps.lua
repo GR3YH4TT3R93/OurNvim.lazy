@@ -435,6 +435,12 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
     end,
   })
 
+  vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
+  aucmd("User", {
+    group = "lualine_augroup",
+    pattern = "LspProgressStatusUpdated",
+    callback = require("lualine").refresh,
+  })
   -- Ndoo Commands {{{
   map({ "n", "x" }, "<leader>ro", function()
     require("ndoo").open({ v = true })
