@@ -3,7 +3,7 @@ return {
   -- commit = "7e348da6e5085ac447144a2ef4b637220ba27209",
   --
   lazy = true,
-  event = "InsertEnter",
+  event = "CursorMoved",
   dependencies = {
     { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
     "saadparwaiz1/cmp_luasnip",

@@ -1,5 +1,6 @@
 return {
   "js-everts/cmp-tailwind-colors",
+  event = "InsertEnter",
   config = function()
     require("cmp-tailwind-colors").setup({
       enable_alpha = true, -- requires pumblend > 0.
