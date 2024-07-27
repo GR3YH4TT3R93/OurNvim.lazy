@@ -1,7 +1,7 @@
 return {
   "navarasu/onedark.nvim",
   dependencies = {
-    "GR3YH4TT3R93/nvim-web-devicons", -- not strictly required, but recommended
+    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
   },
   lazy = false,
   priority = 1000,
