@@ -66,15 +66,15 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
   map({ "n", "t" }, "<A-=>", "<C-w>=", opts)
   map({ "n", "t" }, "<A-->", "<C-w>-", opts)
   map({ "n", "t" }, "<A-+>", "<C-w>+", opts)
-  map({ "n", "t" }, "<A-p>", [[<C-\><C-n><C-w>]], opts)
-  map({ "t" }, "<esc><esc>", [[<C-\><C-n>]], opts)
+  map({ "n", "t" }, "<A-p>", "<C-\\><C-n><C-w>", opts)
+  map({ "t" }, "<esc>", "<C-\\><C-n>:q<CR>", opts)
   -- }}}
 
   -- Save Quit eXit {{{
   map("n", "<C-s>", ":w | e | TSBufEnable highlight<cr>", opts)
   map("x", "<C-s>", "<esc> :w | e | TSBufEnable highlight<cr>", opts)
   map("i", "<C-s>", "<esc> :w | e | TSBufEnable highlight<cr>i", opts)
-  map("n", "<C-q>", ":q!<cr>", opts)
+  map({ "n", "t" }, "<C-q>", ":q!<cr>", opts)
   map("x", "<C-q>", "<esc> :q!<cr>", opts)
   map("i", "<C-q>", "<esc> :q!<cr>", opts)
   map("n", "<C-x>", ":x<cr>", opts)
@@ -83,10 +83,9 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
   --}}}
 
   -- ToggleTerm Commands {{{
-  map("n", "<leader>d", ':TermExec cmd="prd"<CR>', opts)
-  map("i", "<leader>d", ':TermExec cmd="prd"<CR>i', opts)
-  map("n", "<leader>t", ":ToggleTerm<CR>", opts)
-  map("n", "<leader>tx", ":ToggleTerm close<CR>", opts)
+  map({ "n", "i" }, "<leader>d", ':TermExec cmd="prd"<CR>', opts)
+  map({ "n", "i" }, "<leader>t", ":ToggleTerm<CR>", opts)
+  map({ "n", "i" }, "<leader>tx", ":ToggleTerm close<CR>", opts)
   -- }}}
 
   -- Telescope Commands {{{
@@ -216,7 +215,7 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
         focusable = false,
         close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
         border = "rounded",
-        source = "always",
+        source = "if_many",
         prefix = "",
         scope = "cursor",
       }
@@ -313,7 +312,7 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
         require("goto-preview").goto_preview_implementation({})
       end, op)
 
-      map("n", "gI", function()
+      map({ "n", "i" }, "gI", function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
       end, op)
 
@@ -349,6 +348,10 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
       -- end, op)
       map("n", "gs", function()
         vim.lsp.buf.signature_help()
+      end, op)
+      map("n", "gS", function()
+        -- use telescope to show all symbols
+        require("telescope.builtin").lsp_document_symbols()
       end, op)
       map("n", "<leader>rn", function()
         vim.lsp.buf.rename()
@@ -399,7 +402,7 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
   map("n", "<leader>bg", ":VimBeGood<CR>", opts)
   --}}}
 
-  -- Copilot require("CopilotChat") Commands {{{
+  -- Copilot Commands {{{
   map("n", "<leader>cc", function()
     require("CopilotChat").toggle({
       window = {
@@ -414,31 +417,22 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
   map("n", "<leader>db", ":DBUIToggle<CR>", opts)
   --}}}
 
-  map({ "n", "t" }, "<A-h>", "<CMD>NavigatorLeft<CR>")
-  map({ "n", "t" }, "<A-l>", "<CMD>NavigatorRight<CR>")
-  map({ "n", "t" }, "<A-k>", "<CMD>NavigatorUp<CR>")
-  map({ "n", "t" }, "<A-j>", "<CMD>NavigatorDown<CR>")
-  map({ "n", "t" }, "<A-p>", "<CMD>NavigatorPrevious<CR>")
+  -- Navigator Commands {{{
+  map({ "n", "t" }, "<A-h>", "<CMD>NavigatorLeft<CR>", opts)
+  map({ "n", "t" }, "<A-l>", "<CMD>NavigatorRight<CR>", opts)
+  map({ "n", "t" }, "<A-k>", "<CMD>NavigatorUp<CR>", opts)
+  map({ "n", "t" }, "<A-j>", "<CMD>NavigatorDown<CR>", opts)
+  map({ "n", "t" }, "<A-p>", "<CMD>NavigatorPrevious<CR>", opts)
+  -- }}}
 
-  -- map({ "n", "x" }, "<leader>ca", function()
-  --   require("fastaction").code_action()
-  -- end, opts)
-  aucmd("FileType", {
-    pattern = "zsh",
-    callback = function()
-      vim.lsp.start({
-        name = "bashls",
-        cmd = { "bash-language-server", "start" },
-      })
-    end,
-  })
-
+  -- Lualine LSP Progress {{{
   vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
   aucmd("User", {
     group = "lualine_augroup",
     pattern = "LspProgressStatusUpdated",
     callback = require("lualine").refresh,
   })
+  -- }}}
 
   -- Ndoo Commands {{{
   map({ "n", "x" }, "<leader>ro", function()
@@ -471,6 +465,37 @@ if (vim.uv or vim.loop).fs_stat(telescopepath and CopilotChatpath) then
   -- map("n", "<leader>gc", function()
   -- require("neogit").open({ "commit" })
   -- end)
+
+  -- New File Commands {{{
+  map("n", "<leader>e", function()
+    -- Prompt the user for the new file name
+    local new_file_name = vim.fn.input("New file name: ")
+    if new_file_name ~= "" then
+      -- Open the new file
+      vim.cmd("edit " .. new_file_name)
+    end
+  end, opts)
+  -- }}}
+
+  -- Terminal Commands {{{
+  map("n", "<leader>T", function()
+    -- Prompt the user for the new terminal command
+    local new_term_cmd = vim.fn.input("Terminal command: ")
+    if new_term_cmd ~= "" then
+      -- Open the new terminal
+      vim.cmd("!" .. new_term_cmd)
+    end
+  end, opts)
+
+  -- Disable Notifications on InsertEnter {{{
+  vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+    group = vim.api.nvim_create_augroup("NotifyClearGrp", {}),
+    pattern = "*",
+    callback = function()
+      require("notify").dismiss({ silent = true })
+    end,
+  })
+  -- }}}
 
   -- Go Impl Commands {{{
   map("n", "<leader>im", function()

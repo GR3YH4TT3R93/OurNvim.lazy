@@ -1,7 +1,8 @@
 return {
   "nvimdev/dashboard-nvim",
-  event = "BufEnter",
+  event = "VimEnter",
   priority = 1000,
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     require("dashboard").setup({
       theme = "hyper", --  theme is doom and hyper default is hyper
@@ -47,6 +48,22 @@ return {
             group = "Label",
             action = "Telescope find_files",
             key = "f",
+          },
+          {
+            icon = "󰝒 ",
+            desc = "New File",
+            group = "Label",
+            action = function()
+              -- Prompt the user for the new file name
+              local new_file_name = vim.fn.input("New file name: ")
+              if new_file_name ~= "" then
+                -- Open the new file
+                vim.cmd("edit " .. new_file_name)
+              else
+                print("No file name provided.")
+              end
+            end,
+            key = "e",
           },
           {
             icon = "󰝰 ",
