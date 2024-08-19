@@ -1,6 +1,5 @@
 return {
   "AckslD/nvim-neoclip.lua",
-  lazy = true,
   event = "VeryLazy",
   dependencies = { "kkharji/sqlite.lua" },
   config = function()

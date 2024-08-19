@@ -1,6 +1,5 @@
 return {
   "rmagatti/goto-preview",
-  lazy = true,
   opts = {
     -- focus_on_open = false,
     -- dismiss_on_move = true,

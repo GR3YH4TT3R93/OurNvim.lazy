@@ -2,7 +2,6 @@ return {
   "hrsh7th/nvim-cmp",
   -- commit = "7e348da6e5085ac447144a2ef4b637220ba27209",
   --
-  lazy = true,
   event = "CursorMoved",
   dependencies = {
     { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },

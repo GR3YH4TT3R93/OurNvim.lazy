@@ -1,6 +1,5 @@
 return {
   "lewis6991/gitsigns.nvim", --git signs
-  lazy = true,
   event = "VeryLazy",
   config = function()
     ---@type table<string, function|boolean>
