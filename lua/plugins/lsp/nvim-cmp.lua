@@ -14,6 +14,7 @@ return {
     "hrsh7th/cmp-omni",
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "hrsh7th/cmp-nvim-lsp-document-symbol",
+    "uga-rosa/cmp-dictionary",
     "petertriho/cmp-git",
     "rafamadriz/friendly-snippets",
     "rcarriga/cmp-dap",
@@ -25,6 +26,11 @@ return {
   config = function()
     require("cmp-npm").setup({})
     require("cmp_git").setup()
+
+    require("cmp_dictionary").setup({
+      paths = { "~/.config/nvim/dict/en.dict" },
+      exact_length = 2,
+    })
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     local kind_icons = {
@@ -111,12 +117,17 @@ return {
         { name = "luasnip" },
         { name = "git" },
         {
+          name = "dictionary",
+          keyword_length = 2,
+        },
+        {
           name = "omni",
           option = {
             disable_omnifuncs = { "v:lua.vim.lsp.omnifunc" },
           },
         },
         { name = "buffer" },
+        { name = "dotenv" },
         { name = "path" },
         { name = "emoji" },
       },
@@ -230,12 +241,6 @@ return {
           { name = "git" },
           { name = "conventionalcommits" },
           { name = "buffer" },
-        }),
-      }),
-      cmp.setup.filetype("sh", {
-        sources = cmp.config.sources({
-          { name = "dotenv" },
-          { name = "cmdline" },
         }),
       }),
     })
