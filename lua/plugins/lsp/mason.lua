@@ -1,10 +1,9 @@
 return {
-  "WhoIsSethDaniel/mason-tool-installer.nvim",
+  "neovim/nvim-lspconfig",
   event = "VeryLazy",
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
     "jay-babu/mason-null-ls.nvim",
     "jay-babu/mason-nvim-dap.nvim",
     "rcarriga/nvim-dap-ui",
@@ -12,6 +11,7 @@ return {
     "nvim-neotest/nvim-nio",
     "nvimtools/none-ls.nvim",
     "nvimtools/none-ls-extras.nvim",
+    { "WhoIsSethDaniel/mason-tool-installer.nvim", lazy = false },
     "zapling/mason-lock.nvim",
     "folke/lazydev.nvim",
   },
@@ -121,7 +121,7 @@ return {
     })
 
     require("mason-lspconfig").setup({
-      automatic_installation = true,
+      automatic_installation = { exclude = { "lua_ls", "rust_analyzer" } },
       handlers = {
         -- The first entry (without a key) will be the default handler
         -- and will be called for each installed server that doesn't have
@@ -132,26 +132,7 @@ return {
           })
         end,
         -- Next, you can provide a dedicated handler for specific servers.
-        -- For example, a handler override for the `rust_analyzer`:
-        ["rust_analyzer"] = function()
-          --     require("rust-tools").setup {}
-          require("lspconfig").rust_analyzer.setup({
-            settings = {
-              ["rust-analyzer"] = {
-                inlayHints = {
-                  chainingHints = true,
-                  typeHints = true,
-                  parameterHints = true,
-                  maxLength = 25,
-                  enumVariant = true,
-                  -- parameterHints = {
-                  --   mode = "PlainText",
-                  -- },
-                },
-              },
-            },
-          })
-        end,
+        -- For example, a handler override for the `gopls` server:
         ["gopls"] = function()
           require("lspconfig").gopls.setup({
             settings = {
@@ -169,6 +150,7 @@ return {
             },
           })
         end,
+
         ["volar"] = function()
           require("lspconfig").volar.setup({
             -- NOTE: Uncomment to enable volar in file types other than vue.
@@ -226,7 +208,7 @@ return {
           require("lspconfig").tsserver.setup({
             -- NOTE: To enable hybridMode, change HybrideMode to true above and uncomment the following filetypes block.
 
-            -- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+            filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
             init_options = {
               plugins = {
                 {
@@ -252,45 +234,10 @@ return {
             },
           })
         end,
-        ["lua_ls"] = function()
-          require("lspconfig").lua_ls.setup({
-            on_init = function(client)
-              local path = client.workspace_folders[1].name
-              if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
-                return
-              end
 
-              client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-                runtime = {
-                  -- Tell the language server which version of Lua you're using
-                  -- (most likely LuaJIT in the case of Neovim)
-                  version = "LuaJIT",
-                },
-                -- Make the server aware of Neovim runtime files
-                workspace = {
-                  checkThirdParty = false,
-                  library = {
-                    -- vim.env.VIMRUNTIME,
-                    -- Depending on the usage, you might want to add additional paths here.
-                    -- "${3rd}/luv/library",
-                    -- "${3rd}/busted/library",
-                    -- "~/.local/share/nvim/lazy",
-                  },
-                },
-                hint = {
-                  enable = true,
-                  arrayIndex = "Auto",
-                  await = true,
-                  paramName = "All",
-                  paramType = true,
-                  semicolon = "SameLine",
-                  setType = true,
-                },
-              })
-            end,
-            settings = {
-              Lua = {},
-            },
+        ["bashls"] = function()
+          require("lspconfig").bashls.setup({
+            filetypes = { "zsh", "sh", "bash" },
           })
         end,
       },
@@ -310,5 +257,87 @@ return {
     })
 
     require("dapui").setup()
+
+    require("lspconfig").lua_ls.setup({
+      on_init = function(client)
+        local path = client.workspace_folders[1].name
+        if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
+          return
+        end
+
+        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+          runtime = {
+            -- Tell the language server which version of Lua you're using
+            -- (most likely LuaJIT in the case of Neovim)
+            version = "LuaJIT",
+          },
+          -- Make the server aware of Neovim runtime files
+          workspace = {
+            checkThirdParty = false,
+            library = {
+              -- vim.env.VIMRUNTIME,
+              -- Depending on the usage, you might want to add additional paths here.
+              -- "${3rd}/luv/library",
+              -- "${3rd}/busted/library",
+              -- "~/.local/share/nvim/lazy",
+            },
+          },
+          format = {
+            enable = false,
+          },
+          hint = {
+            enable = true,
+            arrayIndex = "Auto",
+            await = true,
+            paramName = "All",
+            paramType = true,
+            semicolon = "SameLine",
+            setType = true,
+          },
+        })
+      end,
+      settings = {
+        Lua = {},
+      },
+    })
+
+    require("lspconfig").rust_analyzer.setup({
+      settings = {
+        ["rust-analyzer"] = {
+          inlayHints = {
+            bindingModeHints = {
+              enable = false,
+            },
+            chainingHints = {
+              enable = true,
+            },
+            closingBraceHints = {
+              enable = true,
+              minLines = 25,
+            },
+            closureReturnTypeHints = {
+              enable = "never",
+            },
+            lifetimeElisionHints = {
+              enable = "never",
+              useParameterNames = false,
+            },
+            maxLength = 25,
+            parameterHints = {
+              enable = true,
+            },
+            reborrowHints = {
+              enable = "never",
+            },
+            renderColons = true,
+            typeHints = {
+              enable = true,
+              hideClosureInitialization = false,
+              hideNamedConstructor = false,
+            },
+          },
+        },
+      },
+    })
   end,
 }
