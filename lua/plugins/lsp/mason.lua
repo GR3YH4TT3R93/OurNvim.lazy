@@ -6,6 +6,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "jay-babu/mason-null-ls.nvim",
     "jay-babu/mason-nvim-dap.nvim",
+    -- { "GR3YH4TT3R93/mason-nvim-dap.nvim", branch = "feat/vue-support" },
     "rcarriga/nvim-dap-ui",
     "mfussenegger/nvim-dap",
     "nvim-neotest/nvim-nio",
@@ -18,7 +19,11 @@ return {
   config = function()
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-    require("mason").setup({})
+    require("mason").setup({
+      ui = {
+        border = "rounded",
+      },
+    })
     require("mason-tool-installer").setup({
       -- a list of all tools you want to ensure are installed upon start
       ensure_installed = {

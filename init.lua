@@ -25,6 +25,9 @@ require("lazy").setup({
     pattern = { "GR3YH4TT3R93" },
     fallback = true,
   },
+  ui = {
+    border = "rounded",
+  },
   change_detection = { notify = false },
   checker = { enabled = true, notify = false },
   install = {
