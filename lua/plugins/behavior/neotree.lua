@@ -168,7 +168,34 @@ return {
         ["gg"] = "git_commit_and_push",
       },
     },
-    nesting_rules = {},
+    nesting_rules = {
+      ["nuxt.config.*"] = {
+        pattern = "^nuxt%.config%..*$", -- Match nuxt.config.*
+        files = { "*.config.*", "tsconfig.json", ".prettierignore" }, -- Match all *.config.* files
+      },
+      ["README"] = {
+        pattern = "^README.*$", -- Match README
+        ignore_case = true,
+        files = { "README.md", "README.txt", "README.rst", "LICENSE" }, -- Match all README files
+      },
+      ["package.json"] = {
+        pattern = "^package%.json$", -- <-- Lua pattern
+        files = { "package-lock.json", "yarn*", "pnpm-lock.yaml", ".npmrc" }, -- <-- glob pattern
+      },
+      ["go"] = {
+        pattern = "(.*)%.go$", -- <-- Lua pattern with capture
+        files = { "*_test.go", "go.mod", "go.sum" }, -- <-- glob pattern with capture
+      },
+      ["js-extended"] = {
+        pattern = "(.+)%.js$",
+        files = { "%1.js.map", "%1.min.js", "%1.d.ts" },
+      },
+      ["docker"] = {
+        pattern = "^dockerfile$",
+        ignore_case = true,
+        files = { ".dockerignore", "docker-compose.*", "dockerfile*" },
+      },
+    },
     filesystem = {
       filtered_items = {
         visible = false, -- when true, they will just be displayed differently than normal items
