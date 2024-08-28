@@ -86,6 +86,10 @@ return {
           return item
         end,
       },
+      performance = {
+        debounce = 0,
+        throttle = 0,
+      },
       sources = {
         { name = "lazydev" },
         { name = "copilot" },
