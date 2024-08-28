@@ -36,6 +36,7 @@ return {
         "git_rebase",
         "git_config",
         "regex",
+        "rust",
         "diff",
         -- "markdown",
         "markdown_inline",
@@ -122,7 +123,7 @@ return {
           },
         },
       },
-    }) -- Remove the trailing comma here
+    })
     vim.treesitter.language.register("bash", "zsh")
   end,
 }
