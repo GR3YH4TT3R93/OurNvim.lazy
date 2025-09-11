@@ -1,3 +1,4 @@
+---@class LazyPlugin
 return {
   "2kabhishek/co-author.nvim",
   dependencies = {

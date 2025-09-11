@@ -1,35 +1,48 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.uv.fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-end
-vim.opt.rtp:prepend(lazypath)
+-- Bootstrap lazy.nvim
+require("lazy-nvim")
 
+-- Add Mise to PATH
+-- require("mise")
+
+-- Setup Neovim Settings
 require("settings")
-require("lazy").setup({
+
+-- Setup and enable plugins
+---@module "lazy"
+---@class LazyConfig
+require("lazy").setup {
   spec = {
+    { import = "plugins.theme" },
+    { import = "plugins.theme.treesitter" },
     { import = "plugins.behavior" },
     { import = "plugins.games" },
     { import = "plugins.git" },
     { import = "plugins.lsp" },
     { import = "plugins.lsp.rust" },
     { import = "plugins.lsp.go" },
+    { import = "plugins.lsp.typescript" },
+    { import = "plugins.lsp.copilot" },
     { import = "plugins.telescope" },
-    { import = "plugins.theme" },
+    -- { import = "plugins.snacks" },
   },
   defaults = {
     lazy = true,
   },
   dev = {
-    path = "~/GitHub",
-    pattern = { "GR3YH4TT3R93" },
+    path = "~/GitHub/plugins",
+    patterns = { "GR3YH4TT3R93" },
     fallback = true,
   },
   ui = {
     border = "rounded",
   },
-  change_detection = { notify = false },
-  checker = { enabled = true, notify = false },
+  change_detection = {
+    notify = true,
+  },
+  checker = {
+    enabled = true,
+    notify = false,
+  },
   install = {
     colorscheme = { "onedark" },
   },
@@ -41,5 +54,14 @@ require("lazy").setup({
       },
     },
   },
-})
+}
+
+-- Setup Keymaps
 require("keymaps")
+
+-- Setup defualt lsp capabilities
+require("lsp")
+
+-- Setup Treesitter
+require("tree-sitter")
+-- require("nerd-fonts")

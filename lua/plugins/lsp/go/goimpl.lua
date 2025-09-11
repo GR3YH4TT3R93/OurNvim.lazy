@@ -1,3 +1,4 @@
+---@class LazyPlugin
 return {
   "edolphin-ydf/goimpl.nvim",
   requires = {

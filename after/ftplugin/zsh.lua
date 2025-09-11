@@ -1,0 +1,9 @@
+-- vim.treesitter.language.register("bash", "zsh")
+-- vim.filetype.add {
+--   filename = {
+--     [".zshrc"] = "bash",
+--     [".zshenv"] = "bash",
+--     [".zprofile"] = "bash",
+--     [".zsh_aliases"] = "bash",
+--   },
+-- }

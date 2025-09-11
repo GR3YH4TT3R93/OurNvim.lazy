@@ -1,31 +1,58 @@
 local o = vim.o
 local opt = vim.opt
 
-o.encoding = "utf-8"
+-- General settings
 o.updatetime = 100
 o.autowriteall = true
-o.autochdir = true
+o.confirm = true
+
+-- Backup settings
+o.bex = ".bak"
 o.backup = false
 o.writebackup = false
+
+-- Search settings
 o.ignorecase = true
 o.smartcase = true
+
+-- Appearance settings
 o.signcolumn = "yes"
 o.number = true
 o.relativenumber = true
-o.cursorline = true
+-- o.cursorline = true
 o.scrolloff = 999
 o.foldmethod = "marker"
+-- o.foldmethod = "expr"
+-- o.foldexpr = "nvim_treesitter#foldexpr()"
+-- o.foldnestmax = 3
+-- o.pumblend = 1
+
+-- Format options
 o.wrap = true
 o.linebreak = true
 o.textwidth = 80
 o.breakindent = true
--- o.breakindentopt = "shift:2"
-o.autoindent = true
--- o.expandtab = true
--- o.tabstop = 2
--- o.shiftwidth = 2
--- o.softtabstop = 2
-o.pumblend = 1
-vim.g.loaded_ruby_provider = 0
-opt.clipboard:append("unnamedplus")
-vim.lsp.set_log_level("OFF")
+
+-- Mouse settings
+vim.o.mousemoveevent = true
+
+-- Completion settings
+opt.completeopt = { "menuone", "noinsert", "popup", "preview" }
+
+-- Clipboard settings
+vim.schedule(function()
+  opt.clipboard:append { "unnamedplus", "unnamed" }
+end)
+
+-- LSP settings
+vim.lsp.log.set_level("OFF")
+
+-- Diagnostic settings
+-- vim.diagnostic.config { virtual_text = true }
+
+-- Filetype settings
+vim.filetype.add {
+  extension = {
+    ["http"] = "http",
+  },
+}

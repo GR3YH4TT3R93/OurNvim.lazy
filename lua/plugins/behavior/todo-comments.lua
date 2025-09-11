@@ -1,5 +1,6 @@
+---@class LazyPlugin
 return {
   "folke/todo-comments.nvim",
-  event = "VeryLazy",
+  event = { "VeryLazy" },
   opts = {},
 }

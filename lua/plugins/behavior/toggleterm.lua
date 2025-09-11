@@ -1,14 +1,14 @@
+---@class LazyPlugin
 return {
   "akinsho/toggleterm.nvim",
   cmd = { "ToggleTerm", "TermExec" },
   opts = {
-    open_mapping = [[<leader>t]],
-    size = 8,
+    -- open_mapping = [[<C-\>]],
+    size = 10,
     insert_mappings = true,
     terminal_mappings = false,
-    shade_terminals = false,
-    winbar = {
-      enabled = false,
-    },
+    persist_mode = false,
+    shade_terminals = true,
+    shading_factor = "-10",
   },
 }

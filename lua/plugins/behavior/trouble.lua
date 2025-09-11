@@ -1,5 +1,6 @@
+---@class LazyPlugin
 return {
   "folke/trouble.nvim",
-  event = "CursorMoved",
+  event = { "BufReadPost" },
   opts = {},
 }

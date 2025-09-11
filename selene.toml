@@ -1,4 +1,8 @@
-std="vim"
+std = "lua51"
 
 [lints]
-mixed_table="allow"
+mixed_table = "allow"
+
+# Define vim standard inline
+[std.vim]
+any = true

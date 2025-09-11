@@ -1,0 +1,50 @@
+---@class LazyPlugin
+return {
+  -- "GR3YH4TT3R/typescript-tools.nvim",
+  -- dev = true,
+  -- -- lazy = false,
+  -- dependencies = {
+  --   "nvim-lua/plenary.nvim",
+  --   "neovim/nvim-lspconfig",
+  --   "mason-org/mason-lspconfig.nvim",
+  -- },
+  -- ft = {
+  --   "typescript",
+  --   "javascript",
+  --   "typescriptreact",
+  --   "javascriptreact",
+  --   "vue",
+  -- },
+  -- ---@module "typescript-tools"
+  -- opts = {
+  --   filetypes = {
+  --     "typescript",
+  --     "javascript",
+  --     "typescriptreact",
+  --     "javascriptreact",
+  --     "vue",
+  --   },
+  --   ---@class Settings
+  --   settings = {
+  --     tsserver_plugins = {
+  --       {
+  --         name = "@vue/typescript-plugin",
+  --         location = vim.fn.expand("$MASON/packages")
+  --           .. "/vue-language-server/node_modules/@vue/language-server",
+  --         languages = { "vue" },
+  --         configNamespace = "typescript",
+  --       },
+  --     },
+  --     tsserver_file_preferences = {
+  --       includeInlayParameterNameHints = "all",
+  --       includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+  --       includeInlayFunctionParameterTypeHints = true,
+  --       includeInlayVariableTypeHints = true,
+  --       includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+  --       includeInlayPropertyDeclarationTypeHints = true,
+  --       includeInlayFunctionLikeReturnTypeHints = true,
+  --       includeInlayEnumMemberValueHints = true,
+  --     },
+  --   },
+  -- },
+}

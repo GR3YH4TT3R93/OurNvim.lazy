@@ -1,129 +1,200 @@
+---@class LazyPlugin
 return {
-  "nvim-treesitter/nvim-treesitter",
-  -- tag = "v0.9.2",
-  build = ":TSUpdate",
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    "numToStr/Comment.nvim",
-    "RRethy/nvim-treesitter-endwise",
-  },
-  config = function()
-    ---@class TSConfigs
-    ---@field setup fun(config: table)
-    local configs = require("nvim-treesitter.configs")
-    require("Comment").setup()
-    configs.setup({
-      ensure_installed = {
-        "c",
-        "lua",
-        "vim",
-        "vimdoc",
-        "query",
-        "vue",
-        "typescript",
-        "javascript",
-        "html",
-        "css",
-        "json",
-        "jsonc",
-        "bash",
-        "go",
-        "gomod",
-        "gosum",
-        "gitcommit",
-        "gitignore",
-        "git_rebase",
-        "git_config",
-        "regex",
-        "rust",
-        "diff",
-        -- "markdown",
-        "markdown_inline",
-        "toml",
-        "yaml",
-        "properties",
-      },
-      auto_install = true,
-      sync_install = false,
-      ignore_install = {},
-      highlight = { enable = true },
-      indent = { enable = true },
-      endwise = { enable = true },
-      modules = {},
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<leader>ss",
-          node_incremental = "<leader>nn",
-          node_decremental = "<leader>np",
-          scope_incremental = "<leader>sn",
-        },
-      },
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true,
-          keymaps = {
-            ["ap"] = "@parameter.outer",
-            ["ip"] = "@parameter.inner",
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
-            ["as"] = { query = "@scope", query_group = "locals" },
-          },
-        },
-        -- FIXME: Change these keymaps
-        move = {
-          enable = true,
-          set_jumps = true, -- whether to set jumps in the jumplist
-          goto_next_start = {
-            ["]m"] = "@function.outer",
-            ["]]"] = { query = "@class.outer", desc = "Next class start" },
-            --
-            -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
-            ["]o"] = "@loop.*",
-            -- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
-            --
-            -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
-            -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
-            ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
-            ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-          },
-          goto_next_end = {
-            ["]M"] = "@function.outer",
-            ["]["] = "@class.outer",
-          },
-          goto_previous_start = {
-            ["[m"] = "@function.outer",
-            ["[["] = "@class.outer",
-          },
-          goto_previous_end = {
-            ["[M"] = "@function.outer",
-            ["[]"] = "@class.outer",
-          },
-          -- Below will go to either the start or the end, whichever is closer.
-          -- Use if you want more granular movements
-          -- Make it even more gradual by adding multiple queries and regex.
-          goto_next = {
-            ["]d"] = "@conditional.outer",
-          },
-          goto_previous = {
-            ["[d"] = "@conditional.outer",
-          },
-        },
-        lsp_interop = {
-          enable = true,
-          border = "none",
-          floating_preview_opts = {},
-          peek_definition_code = {
-            ["<leader>df"] = "@function.outer",
-            ["<leader>dF"] = "@class.outer",
-          },
-        },
-      },
-    })
-    vim.treesitter.language.register("bash", "zsh")
-  end,
+  -- "nvim-treesitter/nvim-treesitter",
+  -- main = "nvim-treesitter.configs",
+  -- build = ":TSUpdate",
+  -- -- event = { "BufReadPost", "CmdlineEnter" },
+  -- lazy = false,
+  -- dependencies = {
+  --   "nvim-treesitter/nvim-treesitter-textobjects",
+  --   "RRethy/nvim-treesitter-textsubjects",
+  --   "RRethy/nvim-treesitter-endwise",
+  -- },
+  -- ---@module "nvim-treesitter.config"
+  -- ---@class TSConfigs
+  -- opts = {
+  --   ensure_installed = {
+  --     "c",
+  --     "lua",
+  --     "vim",
+  --     "vimdoc",
+  --     "query",
+  --     "vue",
+  --     "typescript",
+  --     "javascript",
+  --     "html",
+  --     "css",
+  --     "json",
+  --     "jsonc",
+  --     "bash",
+  --     "go",
+  --     "gomod",
+  --     "gosum",
+  --     "gitcommit",
+  --     "gitignore",
+  --     "git_rebase",
+  --     "git_config",
+  --     "regex",
+  --     "rust",
+  --     "diff",
+  --     "markdown",
+  --     "markdown_inline",
+  --     "toml",
+  --     "yaml",
+  --     "properties",
+  --   },
+  --   auto_install = true,
+  --   sync_install = false,
+  --   ignore_install = {},
+  --   -- modules = {},
+  --   highlight = { enable = true },
+  --   indent = { enable = true },
+  --   endwise = { enable = true },
+  --   incremental_selection = {
+  --     enable = true,
+  --     keymaps = {
+  --       init_selection = "<leader>ss",
+  --       node_incremental = "<leader>nn",
+  --       node_decremental = "<leader>np",
+  --       scope_incremental = "<leader>sn",
+  --     },
+  --   },
+  --   textobjects = {
+  --     select = {
+  --       enable = true,
+  --       lookahead = true,
+  --       keymaps = {
+  --         ["aat"] = "@attribute.outer",
+  --         ["iat"] = "@attribute.inner",
+  --         ["aas"] = "@assignment.outer",
+  --         ["ias"] = "@assignment.inner",
+  --         ["ab"] = "@block.outer",
+  --         ["ib"] = "@block.inner",
+  --         ["aca"] = "@call.outer",
+  --         ["ica"] = "@call.inner",
+  --         ["acl"] = "@class.outer",
+  --         ["icl"] = "@class.inner",
+  --         ["aC"] = "@comment.outer",
+  --         ["iC"] = "@comment.inner",
+  --         ["ico"] = "@conditional.inner",
+  --         ["aco"] = "@conditional.outer",
+  --         ["af"] = "@function.outer",
+  --         ["if"] = "@function.inner",
+  --         ["al"] = "@loop.outer",
+  --         ["il"] = "@loop.inner",
+  --         ["ap"] = "@parameter.outer",
+  --         ["ip"] = "@parameter.inner",
+  --         ["as"] = { query = "@scope", query_group = "locals" },
+  --         ["isn"] = "@scopename.inner",
+  --       },
+  --     },
+  --     move = {
+  --       enable = true,
+  --       set_jumps = true, -- whether to set jumps in the jumplist
+  --       goto_next_start = {
+  --         ["]at"] = "@attribute.inner",
+  --         ["]as"] = "@assignment.inner",
+  --         ["]b"] = "@block.inner",
+  --         ["]ca"] = { query = "@call.inner", desc = "Next call start" },
+  --         ["]cl"] = { query = "@class.inner", desc = "Next class start" },
+  --         ["]f"] = "@function.*",
+  --
+  --         -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
+  --         ["]o"] = "@loop.inner",
+  --         -- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
+  --         ["]p"] = "@parameter.inner",
+  --         --
+  --         -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
+  --         -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
+  --         ["]s"] = {
+  --           query = "@scope",
+  --           query_group = "locals",
+  --           desc = "Next scope start",
+  --         },
+  --         ["]z"] = {
+  --           query = "@fold",
+  --           query_group = "folds",
+  --           desc = "Next fold start",
+  --         },
+  --       },
+  --       goto_next_end = {
+  --         ["]At"] = "@attribute.outer",
+  --         ["]As"] = "@assignment.outer",
+  --         ["]b"] = "@block.inner",
+  --         ["]B"] = "@block.outer",
+  --         ["]Ca"] = "@call.outer",
+  --         ["]Cl"] = "@class.outer",
+  --         ["]F"] = "@function.outer",
+  --         ["]O"] = "@loop.outer",
+  --         ["]P"] = "@parameter.outer",
+  --         ["]S"] = {
+  --           query = "@scope",
+  --           query_group = "locals",
+  --           desc = "Next scope end",
+  --         },
+  --         ["]Z"] = {
+  --           query = "@fold",
+  --           query_group = "folds",
+  --           desc = "Next fold end",
+  --         },
+  --       },
+  --       goto_previous_start = {
+  --         ["[a"] = "@attribute.*",
+  --         ["[b"] = "@block.*",
+  --         ["[ca"] = "@call.*",
+  --         ["[cl"] = "@class.*",
+  --         ["[o"] = "@loop.*",
+  --         ["[f"] = "@function.*",
+  --         ["[p"] = "@parameter.*",
+  --         ["[s"] = {
+  --           query = "@scope",
+  --           query_group = "locals",
+  --           desc = "Previous scope start",
+  --         },
+  --         ["[z"] = {
+  --           query = "@fold",
+  --           query_group = "folds",
+  --           desc = "Previous fold start",
+  --         },
+  --       },
+  --       goto_previous_end = {
+  --         ["[A"] = "@attribute.*",
+  --         ["[B"] = "@block.*",
+  --         ["[Ca"] = "@call.*",
+  --         ["[Cl"] = "@class.*",
+  --         ["[O"] = "@loop.*",
+  --         ["[F"] = "@function.*",
+  --         ["[P"] = "@parameter.*",
+  --         ["[S"] = {
+  --           query = "@scope",
+  --           query_group = "locals",
+  --           desc = "Previous scope end",
+  --         },
+  --         ["[Z"] = {
+  --           query = "@fold",
+  --           query_group = "folds",
+  --           desc = "Previous fold end",
+  --         },
+  --       },
+  --       -- Below will go to either the start or the end, whichever is closer.
+  --       -- Use if you want more granular movements
+  --       -- Make it even more gradual by adding multiple queries and regex.
+  --       goto_next = {
+  --         ["]n"] = "@conditional.*",
+  --       },
+  --       goto_previous = {
+  --         ["[n"] = "@conditional.*",
+  --       },
+  --     },
+  --     lsp_interop = {
+  --       enable = true,
+  --       border = "rounded",
+  --       floating_preview_opts = {},
+  --       peek_definition_code = {
+  --         ["<leader>Df"] = "@function.*",
+  --         ["<leader>Dc"] = "@class.*",
+  --       },
+  --     },
+  --   },
+  -- },
 }

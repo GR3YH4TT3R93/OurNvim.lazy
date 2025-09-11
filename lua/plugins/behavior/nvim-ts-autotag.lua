@@ -1,6 +1,9 @@
+---@class LazyPlugin
 return {
   "windwp/nvim-ts-autotag",
-  -- event = "InsertEnter",
+  dependencies = {
+    { "nvim-treesitter/nvim-treesitter", branch = "main" },
+  },
   ft = {
     "javascript",
     "javascriptreact",
@@ -10,7 +13,7 @@ return {
     "html",
     "vue",
   },
-  config = function()
-    require("nvim-ts-autotag").setup()
-  end,
+  ---@module "nvim-ts-autotag"
+  ---@class nvim-ts-autotag.PluginSetup
+  opts = {},
 }

@@ -1,3 +1,4 @@
+---@class LazyPlugin
 return {
   "debugloop/telescope-undo.nvim",
   config = function()

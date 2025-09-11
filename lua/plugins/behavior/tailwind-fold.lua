@@ -1,7 +1,10 @@
+---@class LazyPlugin
 return {
   "razak17/tailwind-fold.nvim",
-  event = "BufRead",
-  opts = {},
-  dependencies = { "nvim-treesitter/nvim-treesitter" },
+  event = { "BufReadPost" },
+  dependencies = {
+    { "nvim-treesitter/nvim-treesitter", branch = "main" },
+  },
   ft = { "html", "svelte", "astro", "vue", "typescriptreact", "php", "blade" },
+  opts = {},
 }

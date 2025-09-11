@@ -1,7 +1,8 @@
+---@class LazyPlugin
 return {
-  "nguyenvukhang/nvim-toggler",
-  event = "CursorMoved",
-  config = function()
-    require("nvim-toggler").setup()
-  end,
+  -- "nguyenvukhang/nvim-toggler",
+  -- event = "CursorMoved",
+  -- config = function()
+  --   require("nvim-toggler").setup()
+  -- end,
 }

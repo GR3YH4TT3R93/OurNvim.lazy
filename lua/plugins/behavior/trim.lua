@@ -1,9 +1,6 @@
+---@class LazyPlugin
 return {
-  "cappyzawa/trim.nvim",
-  event = "BufWritePre",
-  config = function()
-    require("trim").setup({
-      -- disable = { "markdown" },
-    })
-  end,
+  -- "cappyzawa/trim.nvim",
+  -- event = { "BufWritePre" },
+  -- opts = {},
 }

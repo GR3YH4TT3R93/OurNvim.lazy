@@ -1,0 +1,37 @@
+-- ---@class LazyPlugin
+return {
+  --   "CopilotC-Nvim/CopilotChat.nvim",
+  --   -- branch = "canary",
+  --   dependencies = {
+  --     -- { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+  --     { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log wrapper
+  --   },
+  --   build = "make tiktoken",
+  --   ---@module "CopilotChat"
+  --   ---@class CopilotChat.config.Config
+  --   opts = {
+  --     debug = false, -- Enable debugging
+  --     show_folds = false,
+  --     show_help = false,
+  --     auto_insert_mode = true,
+  --     model = "claude-3.5-sonnet",
+  --     window = {
+  --       layout = "float",
+  --       -- title = "🤖 Copilot",
+  --     },
+  --     headers = {
+  --       user = "👤 ",
+  --       assistant = "🤖 Copilot",
+  --       tool = "🔧 Tool",
+  --     },
+  --     mappings = {
+  --       -- complete = {
+  --       --   insert = "",
+  --       -- },
+  --       close = {
+  --         normal = "<Esc>",
+  --         insert = "<leader>x",
+  --       },
+  --     },
+  --   },
+}

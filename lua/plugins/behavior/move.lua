@@ -1,6 +1,7 @@
+---@class LazyPlugin
 return {
   "fedepujol/move.nvim",
-  event = "CursorMoved",
+  -- event = "CursorMoved",
   opts = {
     char = {
       enable = true,

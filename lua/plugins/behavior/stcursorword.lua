@@ -1,5 +1,8 @@
+---@class LazyPlugin
 return {
   "sontungexpt/stcursorword",
-  event = "CursorMoved",
-  opts = {}
+  -- event = { "VeryLazy" },
+  event = { "CursorMoved" },
+  ---@module "stcursorword"
+  opts = {},
 }

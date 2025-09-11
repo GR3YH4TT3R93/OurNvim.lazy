@@ -1,0 +1,43 @@
+---@class LazyPlugin
+return {
+  "lewis6991/ts-install.nvim",
+  -- lazy = false,
+  event = { "VimEnter", "CmdlineEnter" },
+  ---@module "ts-install"
+  ---@class ts_install.config
+  opts = {
+    auto_install = true,
+    install_dir = vim.fn.stdpath("data") .. "/tree-sitter",
+    ensure_install = {
+      "c",
+      "lua",
+      "vim",
+      "vimdoc",
+      "query",
+      "vue",
+      "ecma",
+      "typescript",
+      "javascript",
+      "html",
+      "css",
+      "json",
+      "jsonc",
+      "bash",
+      "go",
+      "gomod",
+      "gosum",
+      "gitcommit",
+      "gitignore",
+      "git_rebase",
+      "git_config",
+      "regex",
+      "rust",
+      "diff",
+      "markdown",
+      "markdown_inline",
+      "toml",
+      "yaml",
+      "properties",
+    },
+  },
+}

@@ -1,3 +1,4 @@
+---@class LazyPlugin
 return {
   "rmagatti/goto-preview",
   opts = {

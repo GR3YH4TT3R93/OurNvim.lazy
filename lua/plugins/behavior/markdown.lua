@@ -1,8 +1,18 @@
+---@class LazyPlugin
 return {
-  "MeanderingProgrammer/markdown.nvim",
-  main = "render-markdown",
-  ft = "markdown",
-  opts = {},
-  -- name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
-  dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+  "MeanderingProgrammer/render-markdown.nvim",
+  -- commit = "ea3678daff66656a9e1c20914d204b7c841c5030",
+  ft = { "markdown" },
+  opts = {
+    heading = {
+      position = "overlay", -- "inline" | "overlay"
+      width = "full", -- "block" | "full"
+    },
+    code = {
+      width = "block", -- "block" | "full"
+      left_pad = 2,
+      right_pad = 2,
+      -- min_width = 30,
+    },
+  },
 }

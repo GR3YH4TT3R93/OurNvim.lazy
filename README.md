@@ -12,42 +12,16 @@
 
 ## ✅ Installation
 
-### 📲 For Termux (Main Branch)
-
 1. **Clone the repository**:
+
    ```bash
-   git clone --branch main https://github.com/GR3YH4TT3R93/OurNvim.lazy.git ~/.config/nvim
+   git clone --branch dirty https://github.com/GR3YH4TT3R93/OurNvim.lazy.git ~/.config/nvim
    ```
 
 2. **Install dependencies**:
    - Ensure you have `lazy.nvim` and other required plugins set up.
    - Open Neovim and run the following command to install plugins:
-     ```vim
-     :LazySync
-     ```
 
-3. **Create symbolic links for language servers**:
-   - **Lua Language Server**:
-     ```bash
-     mkdir -p ~/.local/share/mason/packages/lua-language-server
-     ln -s /data/data/com.termux/files/usr/bin/lua-language-server ~/.local/share/mason/packages/lua-language-server
-     ```
-   - **Rust Analyzer**:
-     ```bash
-     mkdir -p ~/.local/share/mason/packages/rust-analyzer
-     ln -s /data/data/com.termux/files/usr/bin/rust-analyzer ~/.local/share/mason/packages/rust-analyzer/rust-analyzer-aarch64-unknown-linux-gnu
-     ```
-
-### 🐧 For Debian and Similar Distributions (Linux Branch)
-
-1. **Clone the repository**:
-   ```bash
-   git clone --branch linux https://github.com/GR3YH4TT3R93/OurNvim.lazy.git ~/.config/nvim
-   ```
-
-2. **Install dependencies**:
-   - Ensure you have `lazy.nvim` and other required plugins set up.
-   - Open Neovim and run the following command to install plugins:
      ```vim
      :LazySync
      ```

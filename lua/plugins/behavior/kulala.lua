@@ -1,5 +1,7 @@
+---@class LazyPlugin
 return {
   "mistweaverco/kulala.nvim",
+  ft = { "http" },
   config = function()
     -- Setup is required, even if you don't pass any options
     require("kulala").setup({
@@ -16,11 +18,6 @@ return {
       },
       lualine = {
         icon = "🐼",
-      },
-    })
-    vim.filetype.add({
-      extension = {
-        ["http"] = "http",
       },
     })
   end,

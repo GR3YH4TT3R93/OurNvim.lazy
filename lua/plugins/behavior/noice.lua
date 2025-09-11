@@ -1,8 +1,12 @@
+---@class LazyPlugin
 return {
   "folke/noice.nvim",
-  commit = "d9328ef903168b6f52385a751eb384ae7e906c6f",
-  event = "VeryLazy",
+  lazy = false,
+  -- event = { "VimEnter", "CmdlineEnter" },
+  ---@module "noice"
+  ---@class NoiceConfig
   opts = {
+
     -- add any options here
     lsp = {
       progress = {
@@ -19,7 +23,7 @@ return {
     presets = {
       bottom_search = true, -- use a classic bottom cmdline for search
       command_palette = false, -- position the cmdline and popupmenu together
-      long_message_to_split = true, -- long messages will be sent to a split
+      long_message_to_split = false, -- long messages will be sent to a split
       inc_rename = false, -- enables an input dialog for inc-rename.nvim
       lsp_doc_border = true, -- add a border to hover docs and signature help
     },
@@ -30,6 +34,6 @@ return {
     -- OPTIONAL:
     --   `nvim-notify` is only needed, if you want to use the notification view.
     --   If not available, we use `mini` as the fallback
-    { "rcarriga/nvim-notify", opts = { timeout = 100 } },
+    "GR3YH4TT3R93/nvim-notify",
   },
 }
